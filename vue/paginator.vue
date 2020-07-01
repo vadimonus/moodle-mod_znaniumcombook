@@ -1,37 +1,29 @@
 <template>
     <nav>
         <ul class="pagination justify-content-center">
-            <li
-                    v-for="(type, page) in pages"
-                    :key="page"
-                    class="page-item"
-                    :class="{
-                        active: type=='current',
-                        disabled: disabled(type),
-                    }"
-            >
-                <span v-if="type=='current'" class="page-link">
-                    {{page}}
-                </span>
-                <a v-if="type=='link'" class="page-link" href="#" @click="specified(page)">
-                    {{page}}
-                </a>
-                <span v-if="type=='dots'" class="page-link disabled">
-                    ...
-                </span>
-                <a v-if="type=='prev'" class="page-link" href="#" @click="prev">
-                    &laquo; Назад
-                </a>
-                <span v-if="type=='prev_disabled'" class="page-link">
-                    &laquo; Назад
-                </span>
-                <a v-if="type=='next'" class="page-link" href="#" @click="next">
-                    Вперед &raquo;
-                </a>
-                <span v-if="type=='next_disabled'" class="page-link">
-                    Вперед &raquo;
-                </span>
-            </li>
+            <template v-for="(type, page) in pages">
+                <li v-if="type=='current'" class="page-item active">
+                    <span class="page-link" v-text="page"></span>
+                </li>
+                <li v-if="type=='link'" class="page-item">
+                    <a class="page-link" href="#" @click="loadPage(page)" v-text="page"></a>
+                </li>
+                <li v-if="type=='dots'" class="page-item disabled">
+                    <span class="page-link" v-text="strings.paginator_dots"></span>
+                </li>
+                <li v-if="type=='prev'" class="page-item">
+                    <a class="page-link" href="#" @click="prevPage()" v-text="strings.paginator_prev"></a>
+                </li>
+                <li v-if="type=='prev_disabled'" class="page-item disabled">
+                    <span class="page-link" v-text="strings.paginator_prev"></span>
+                </li>
+                <li v-if="type=='next'" class="page-item">
+                    <a class="page-link" href="#" @click="nextPage()" v-text="strings.paginator_next"></a>
+                </li>
+                <li v-if="type=='next_disabled'" class="page-item disabled">
+                    <span class="page-link" v-text="strings.paginator_next"></span>
+                </li>
+            </template>
         </ul>
     </nav>
 </template>
@@ -43,6 +35,7 @@
         name: 'Paginator',
         computed: {
             ...mapState([
+                'strings',
                 'currentPageNum',
                 'pagesTotal',
             ]),
@@ -87,23 +80,14 @@
             },
         },
         methods: {
-            prev() {
+            prevPage() {
                 this.$store.dispatch('loadPage', this.currentPageNum - 1);
             },
-            next() {
+            nextPage() {
                 this.$store.dispatch('loadPage', this.currentPageNum + 1);
             },
-            specified(number) {
+            loadPage(number) {
                 this.$store.dispatch('loadPage', number);
-            },
-            disabled(type) {
-                switch (type) {
-                    case 'dots':
-                    case 'prev_disabled':
-                    case 'next_disabled':
-                        return true;
-                }
-                return false;
             },
         },
     };

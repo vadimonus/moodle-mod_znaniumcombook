@@ -3,21 +3,20 @@
         <div class="col-auto">
             <img :src="publication.cover" alt="Обложка" class="border border-dark"/>
         </div>
-        <div class="col">
-            {{ publication.biblio_record }}
-        </div>
+        <div class="col" v-text="publication.biblio_record"></div>
         <div class="col-auto">
             <button
                     class="btn btn-primary"
                     @click="selectBook(publication.id)"
-            >
-                Выбрать
-            </button>
+                    v-text="strings.select_book_btn"
+            ></button>
         </div>
     </div>
 </template>
 
 <script>
+    import {mapState} from 'vuex';
+
     export default {
         name: "BooksListItem",
         props: {
@@ -25,6 +24,11 @@
                 type: Object,
                 default: () => ({}),
             }
+        },
+        computed: {
+            ...mapState([
+                'strings',
+            ]),
         },
         methods: {
             selectBook() {

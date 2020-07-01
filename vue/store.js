@@ -1,7 +1,8 @@
+import $ from 'jquery';
 import Vue from 'vue';
 import Vuex from 'vuex';
 import moodleAjax from 'core/ajax';
-// import moodleStorage from 'core/localstorage';
+import moodleStorage from 'core/localstorage';
 import Notification from 'core/notification';
 
 Vue.use(Vuex);
@@ -79,29 +80,29 @@ export default new Vuex.Store({
         },
     },
     actions: {
-        // async loadComponentStrings(context) {
-        //     const lang = $('html').attr('lang').replace(/-/g, '_');
-        //     const cacheKey = 'mod_vuejsdemo/strings/' + lang;
-        //     const cachedStrings = moodleStorage.get(cacheKey);
-        //     if (cachedStrings) {
-        //         context.commit('setStrings', JSON.parse(cachedStrings));
-        //     } else {
-        //         const request = {
-        //             methodname: 'core_get_component_strings',
-        //             args: {
-        //                 'component': 'mod_vuejsdemo',
-        //                 lang,
-        //             },
-        //         };
-        //         const loadedStrings = await moodleAjax.call([request])[0];
-        //         let strings = {};
-        //         loadedStrings.forEach((s) => {
-        //             strings[s.stringid] = s.string;
-        //         });
-        //         context.commit('setStrings', strings);
-        //         moodleStorage.set(cacheKey, JSON.stringify(strings));
-        //     }
-        // },
+        async loadComponentStrings(context) {
+            const lang = $('html').attr('lang').replace(/-/g, '_');
+            const cacheKey = 'mod_znaniumcombook/strings/' + lang;
+            const cachedStrings = moodleStorage.get(cacheKey);
+            if (cachedStrings) {
+                context.commit('setStrings', JSON.parse(cachedStrings));
+            } else {
+                const request = {
+                    methodname: 'core_get_component_strings',
+                    args: {
+                        'component': 'mod_znaniumcombook',
+                        lang,
+                    },
+                };
+                const loadedStrings = await moodleAjax.call([request])[0];
+                let strings = {};
+                loadedStrings.forEach((s) => {
+                    strings[s.stringid] = s.string;
+                });
+                context.commit('setStrings', strings);
+                moodleStorage.set(cacheKey, JSON.stringify(strings));
+            }
+        },
         async search(context, queryString) {
             if (queryString == context.state.queryString) {
                 return;

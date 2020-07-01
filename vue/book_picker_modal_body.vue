@@ -1,20 +1,14 @@
 <template>
     <div>
         <search-form></search-form>
-        <div v-if="searchError" class="text-center text-danger">
-            Произошла ошибка
-        </div>
-        <div v-else-if="searching" class="text-center">
-            ... идет поиск ...
-        </div>
+        <div v-if="searchError" class="text-center text-danger" v-text="strings.search_error"></div>
+        <div v-else-if="searching" class="text-center"  v-text="strings.searching"></div>
         <div v-else-if="pagesTotal > 0">
             <paginator></paginator>
             <books-list></books-list>
             <paginator></paginator>
         </div>
-        <div v-else-if="queryString.length > 0" class="text-center">
-            По вашему запросу ничего не найдено
-        </div>
+        <div v-else-if="queryString.length > 0" class="text-center" v-text="strings.nothing_found"></div>
     </div>
 </template>
 
@@ -33,6 +27,7 @@
         },
         computed: {
             ...mapState([
+                'strings',
                 'searching',
                 'currentPageNum',
                 'pagesTotal',

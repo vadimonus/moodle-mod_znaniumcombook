@@ -1,4 +1,3 @@
-// import Str from 'core/str';
 import ModalFactory from 'core/modal_factory';
 import ModalEvents from 'core/modal_events';
 import Vue from 'vue';
@@ -13,7 +12,7 @@ export default class BookPickerModal {
     async show(onHideCallback) {
         this.modal = await ModalFactory.create({
             type: ModalFactory.types.CANCEL,
-            title: 'Поиск публикации',
+            title: this.parentVue.strings.modal_title,
             body: '',
         });
 

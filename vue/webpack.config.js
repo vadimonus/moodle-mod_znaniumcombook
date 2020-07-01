@@ -61,24 +61,15 @@ module.exports = (env, options) => {
             'core/ajax': {
                 amd: 'core/ajax'
             },
-            // 'core/str': {
-            //     amd: 'core/str'
-            // },
             'core/modal_factory': {
                 amd: 'core/modal_factory'
             },
             'core/modal_events': {
                 amd: 'core/modal_events'
             },
-            // 'core/fragment': {
-            //     amd: 'core/fragment'
-            // },
-            // 'core/yui': {
-            //     amd: 'core/yui'
-            // },
-            // 'core/localstorage': {
-            //     amd: 'core/localstorage'
-            // },
+            'core/localstorage': {
+                amd: 'core/localstorage'
+            },
             'core/notification': {
                 amd: 'core/notification'
             },
