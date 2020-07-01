@@ -1,18 +1,17 @@
-/**
- * Book picker interface
- *
- * @package mod_znaniumcombook
- * @copyright 2020 COPYRIGHT
- * @license LICENSE
- */
-
 import $ from 'jquery';
 import Vue from 'vue';
 import store from './store';
 import {mapState} from 'vuex';
 import modal from './book_picker_modal';
 
-export function init(appSelector, buttonSelector, nameSelector, descriptionSelector) {
+export function init() {
+
+    const appSelector = '#fgroup_id_book';
+    const bookIdSelector = '#id_book_id';
+    const bookDescriptionSelector = '#id_book_description';
+    const buttonSelector = '#id_book_select';
+    const nameSelector = '#id_name';
+    const introSelector = '#id_introeditoreditable';
 
     new Vue({
         el: appSelector,
@@ -41,6 +40,14 @@ export function init(appSelector, buttonSelector, nameSelector, descriptionSelec
                     this.modal.hide();
                 }
             },
+        },
+        beforeMount: function() {
+            let id = $(bookIdSelector).val();
+            let biblio_record = $(bookDescriptionSelector).val();
+            this.$store.commit('setSelectedBook', {
+                id,
+                biblio_record
+            });
         },
         mounted: function () {
             store.dispatch('loadComponentStrings');
