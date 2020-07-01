@@ -72,6 +72,7 @@ class mod_znaniumcombook_mod_form extends moodleform_mod {
         $mform->addElement('group', 'book', get_string('mod_form_book', 'znaniumcombook'), $bookelements, ' ', true);
         $mform->setType('book[id]', PARAM_INT);
         $mform->setType('book[description]', PARAM_RAW_TRIMMED);
+        $mform->addRule('book', null, 'required', null, 'client');
 
         $PAGE->requires->js_call_amd('mod_znaniumcombook/bookpicker-lazy', 'init');
 
@@ -101,5 +102,15 @@ class mod_znaniumcombook_mod_form extends moodleform_mod {
         if (!empty($default_values['bookpage'])) {
             $default_values['page'] = $default_values['bookpage'];
         }
+    }
+
+    function validation($data, $files) {
+        $errors = parent::validation($data, $files);
+
+        if (empty($data['book']['id'])) {
+            $errors['book'] = get_string('required');
+            return $errors;
+        }
+        return $errors;
     }
 }
