@@ -1,0 +1,57 @@
+.path-mod-znaniumcombook #book-picker-modal-body .mb-3, .path-mod-znaniumcombook #book-picker-modal-body .my-3 {
+  margin-bottom: 1rem !important; }
+
+.path-mod-znaniumcombook #book-picker-modal-body .mt-3, .path-mod-znaniumcombook #book-picker-modal-body .my-3 {
+  margin-top: 1rem !important; }
+
+.path-mod-znaniumcombook #book-picker-modal-body .input-group {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: 100%; }
+  .path-mod-znaniumcombook #book-picker-modal-body .input-group .form-control {
+    position: relative;
+    flex: 1 1 auto;
+    width: 1%;
+    margin-bottom: 0; }
+
+.path-mod-znaniumcombook #book-picker-modal-body .pagination {
+  display: flex;
+  padding-left: 0;
+  list-style: none; }
+
+.path-mod-znaniumcombook #book-picker-modal-body .align-items-center {
+  align-items: center !important; }
+
+.path-mod-znaniumcombook #book-picker-modal-body .justify-content-center {
+  justify-content: center !important; }
+
+.path-mod-znaniumcombook #book-picker-modal-body .border-dark {
+  border-color: #343a40 !important; }
+
+.path-mod-znaniumcombook #book-picker-modal-body .border {
+  border: 1px solid; }
+
+.path-mod-znaniumcombook #book-picker-modal-body .row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px; }
+
+.path-mod-znaniumcombook #book-picker-modal-body .col, .path-mod-znaniumcombook #book-picker-modal-body .col-auto {
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px; }
+
+.path-mod-znaniumcombook #book-picker-modal-body .col {
+  flex-basis: 0%;
+  flex-grow: 1;
+  max-width: 100%; }
+
+.path-mod-znaniumcombook #book-picker-modal-body .col-auto {
+  flex: 0 0 auto;
+  width: auto;
+  max-width: 100%; }
+
