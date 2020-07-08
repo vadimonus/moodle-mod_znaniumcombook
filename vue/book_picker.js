@@ -10,8 +10,6 @@ export function init() {
     const bookIdSelector = '#id_book_id';
     const bookDescriptionSelector = '#id_book_description';
     const buttonSelector = '#id_book_select';
-    const nameSelector = '#id_name';
-    const introSelector = '#id_introeditoreditable';
 
     new Vue({
         el: appSelector,
@@ -55,16 +53,6 @@ export function init() {
         watch: {
             'stringsLoaded': function () {
                 $(buttonSelector).removeAttr('disabled');
-            },
-            'selectedBook.id': function () {
-                if ($(nameSelector).val()) {
-                    return;
-                }
-                let name = this.selectedBook.description;
-                if (name.length > 255) {
-                    name = name.substring(0, 252) + '...';
-                }
-                $(nameSelector).val(name);
             },
         },
         store,

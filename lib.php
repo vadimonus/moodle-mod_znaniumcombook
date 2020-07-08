@@ -24,6 +24,9 @@
 
 defined('MOODLE_INTERNAL') || die;
 
+define('ZNANIUMCOMBOOK_BIBLIOGRAPHY_POSITION_BEFORE', 0);
+define('ZNANIUMCOMBOOK_BIBLIOGRAPHY_POSITION_AFTER', 1);
+
 /**
  * List of features supported in module
  * @param string $feature FEATURE_xx constant for requested feature
@@ -73,10 +76,14 @@ function znaniumcombook_reset_userdata($data) {
 function znaniumcombook_add_instance($data, $mform) {
     global $DB;
 
+    $config = get_config('znaniumcombook');
+
     $data->bookid = $data->book['id'];
     $data->bookdescription = $data->book['description'];
     $data->bookpage = $data->page;
     $data->timemodified = time();
+    $data->showbibliography = isset($data->showbibliography) ?: $config->showbibliography;
+    $data->bibliographyposition = isset($data->bibliographyposition) ?: $config->bibliographyposition;
     $data->id = $DB->insert_record('znaniumcombook', $data);
 
     $completiontimeexpected = !empty($data->completionexpected) ? $data->completionexpected : null;
@@ -94,10 +101,14 @@ function znaniumcombook_add_instance($data, $mform) {
 function znaniumcombook_update_instance($data, $mform) {
     global $DB;
 
+    $config = get_config('znaniumcombook');
+
     $data->bookid = $data->book['id'];
     $data->bookdescription = $data->book['description'];
     $data->bookpage = $data->page;
     $data->timemodified = time();
+    $data->showbibliography = isset($data->showbibliography) ?: $config->showbibliography;
+    $data->bibliographyposition = isset($data->bibliographyposition) ?: $config->bibliographyposition;
     $data->id = $data->instance;
 
     $DB->update_record('znaniumcombook', $data);
@@ -129,7 +140,48 @@ function znaniumcombook_delete_instance($id) {
     return true;
 }
 
-///**
+/**
+ * Given a course_module object, this function returns any
+ * "extra" information that may be needed when printing
+ * this activity in a course listing.
+ *
+ * See {@link get_array_of_activities()} in course/lib.php
+ *
+ * @param object $coursemodule
+ * @return cached_cm_info info
+ */
+function znaniumcombook_get_coursemodule_info($coursemodule) {
+    global $CFG, $DB;
+
+    if (!$book = $DB->get_record('znaniumcombook', array('id' => $coursemodule->instance),
+        'id, name, intro, introformat, bookdescription, showbibliography, bibliographyposition')
+    ) {
+        return NULL;
+    }
+
+    $info = new cached_cm_info();
+    $info->name = $book->name;
+
+    //note: there should be a way to differentiate links from normal resources
+    $info->icon = '';
+    $fullurl = "$CFG->wwwroot/mod/znaniumcombook/view.php?id=$coursemodule->id";
+    $info->onclick = "window.open('$fullurl'); return false;";
+
+    $info->content = '';
+    if ($book->showbibliography && $book->bibliographyposition === ZNANIUMCOMBOOK_BIBLIOGRAPHY_POSITION_BEFORE) {
+        $info->content .= '<div>' . htmlentities($book->bookdescription) . '</div>';
+    }
+    if ($coursemodule->showdescription) {
+        // Convert intro to html. Do not filter cached version, filters run at display time.
+        $info->content = format_module_intro('znaniumcombook', $book, $coursemodule->id, false);
+    }
+    if ($book->showbibliography && $book->bibliographyposition === ZNANIUMCOMBOOK_BIBLIOGRAPHY_POSITION_AFTER) {
+        $info->content .= '<div>' . htmlentities($book->bookdescription) . '</div>';
+    }
+
+    return $info;
+}
+
 /**
  * Mark the activity completed (if required) and trigger the course_module_viewed event.
  *

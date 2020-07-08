@@ -40,8 +40,8 @@ class backup_znaniumcombook_activity_structure_step extends backup_activity_stru
 
         // Define each element separated
         $znaniumcombook = new backup_nested_element('znaniumcombook', array('id'), array(
-            'name', 'timemodified', 'intro', 'introformat', 'bookid',
-            'bookdescription', 'bookpage'));
+            'name', 'timemodified', 'intro', 'introformat', 'bookid', 'bookdescription', 'bookpage',
+            'showbibliography', 'bibliographyposition'));
 
         // Build the tree
         //nothing here for URLs
