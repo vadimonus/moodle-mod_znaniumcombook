@@ -80,10 +80,8 @@ class mod_znaniumcombook_mod_form extends moodleform_mod {
         $mform->setType('page', PARAM_INT);
 
         // Do not display for single module course format.
-        if ($this->courseformat->has_view_page()) {
-            $mform->addElement('advcheckbox', 'showbibliography', get_string('mod_form_show_bibliography', 'znaniumcombook'));
-            $mform->setDefault('showbibliography', $config->showbibliography);
-        }
+        $mform->addElement('advcheckbox', 'showbibliography', get_string('mod_form_show_bibliography', 'znaniumcombook'));
+        $mform->setDefault('showbibliography', $config->showbibliography);
 
         $this->standard_intro_elements();
         $element = $mform->getElement('introeditor');
@@ -92,19 +90,17 @@ class mod_znaniumcombook_mod_form extends moodleform_mod {
         $element->setAttributes($attributes);
 
         //-------------------------------------------------------
-        if ($this->courseformat->has_view_page()) {
-            $mform->addElement('header', 'optionssection', get_string('appearance'));
+        $mform->addElement('header', 'optionssection', get_string('appearance'));
 
-            $bibliographypositions = array(
-                ZNANIUMCOMBOOK_BIBLIOGRAPHY_POSITION_BEFORE => get_string('mod_form_bibliography_position_before', 'znaniumcombook'),
-                ZNANIUMCOMBOOK_BIBLIOGRAPHY_POSITION_AFTER => get_string('mod_form_bibliography_position_after', 'znaniumcombook'),
-            );
-            $mform->addElement('select', 'bibliographyposition', get_string('mod_form_bibliography_position', 'znaniumcombook'), $bibliographypositions);
-            $mform->setType('bibliographyposition', PARAM_INT);
-            $mform->setDefault('bibliographyposition', $config->bibliographyposition);
-            $mform->hideIf('bibliographyposition', 'showbibliography', 'notchecked');
-            $mform->hideIf('bibliographyposition', 'showdescription', 'notchecked');
-        }
+        $bibliographypositions = array(
+            ZNANIUMCOMBOOK_BIBLIOGRAPHY_POSITION_BEFORE => get_string('mod_form_bibliography_position_before', 'znaniumcombook'),
+            ZNANIUMCOMBOOK_BIBLIOGRAPHY_POSITION_AFTER => get_string('mod_form_bibliography_position_after', 'znaniumcombook'),
+        );
+        $mform->addElement('select', 'bibliographyposition', get_string('mod_form_bibliography_position', 'znaniumcombook'), $bibliographypositions);
+        $mform->setType('bibliographyposition', PARAM_INT);
+        $mform->setDefault('bibliographyposition', $config->bibliographyposition);
+        $mform->disabledIf('bibliographyposition', 'showbibliography', 'notchecked');
+        $mform->disabledIf('bibliographyposition', 'showdescription', 'notchecked');
 
         //-------------------------------------------------------
         $this->standard_coursemodule_elements();

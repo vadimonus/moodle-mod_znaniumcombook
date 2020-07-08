@@ -25,9 +25,10 @@
 
 require('../../config.php');
 require_once("$CFG->dirroot/mod/znaniumcombook/lib.php");
-require_once($CFG->libdir . '/completionlib.php');
+require_once("$CFG->dirroot/mod/znaniumcombook/locallib.php");
 
 $id = required_param('id', PARAM_INT);        // Course module ID
+$forceview = optional_param('forceview', 0, PARAM_BOOL);
 
 $cm = get_coursemodule_from_id('znaniumcombook', $id, 0, false, MUST_EXIST);
 $book = $DB->get_record('znaniumcombook', array('id' => $cm->instance), '*', MUST_EXIST);
@@ -40,6 +41,8 @@ require_capability('mod/znaniumcombook:view', $context);
 // Completion and trigger events.
 znaniumcombook_view($book, $course, $cm, $context);
 
+$PAGE->set_url('/mod/znaniumcombook/view.php', array('id' => $cm->id));
+
 $params = array(
     'contextid' => $context->id,
     'documentid' => $book->bookid,
@@ -47,5 +50,18 @@ $params = array(
 if ($book->bookpage) {
     $params['page'] = $book->bookpage;
 }
+
+if (!course_get_format($course)->has_view_page()) {
+    if (has_capability('moodle/course:manageactivities', $context)
+        || has_capability('moodle/course:update', $context->get_course_context())
+    ) {
+        $forceview = true;
+    }
+}
+
 $url = new moodle_url('/blocks/znanium_com/redirect.php', $params);
-redirect($url);
+if (!$forceview) {
+    redirect($url);
+}
+
+znaniumcombook_print_workaround($book, $cm, $course, $url);

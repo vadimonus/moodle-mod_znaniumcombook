@@ -44,6 +44,7 @@ $string['select_book_btn'] = 'Выбрать';
 $string['paginator_prev'] = '« Назад';
 $string['paginator_next'] = 'Вперед »';
 $string['paginator_dots'] = '...';
+$string['clicktoopen'] = 'Перейти';
 
 
 $string['pluginadministration'] = 'Управление книгой из ЭБС Znanium';

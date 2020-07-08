@@ -27,6 +27,8 @@ defined('MOODLE_INTERNAL') || die;
 define('ZNANIUMCOMBOOK_BIBLIOGRAPHY_POSITION_BEFORE', 0);
 define('ZNANIUMCOMBOOK_BIBLIOGRAPHY_POSITION_AFTER', 1);
 
+require_once($CFG->libdir . '/completionlib.php');
+
 /**
  * List of features supported in module
  * @param string $feature FEATURE_xx constant for requested feature
@@ -80,10 +82,15 @@ function znaniumcombook_add_instance($data, $mform) {
 
     $data->bookid = $data->book['id'];
     $data->bookdescription = $data->book['description'];
+    unset($data->book);
     $data->bookpage = $data->page;
     $data->timemodified = time();
-    $data->showbibliography = isset($data->showbibliography) ?: $config->showbibliography;
-    $data->bibliographyposition = isset($data->bibliographyposition) ?: $config->bibliographyposition;
+    if (!isset($data->showbibliography)) {
+        $data->showbibliography = $config->showbibliography;
+    }
+    if (!isset($data->bibliographyposition)) {
+        $data->bibliographyposition = $config->bibliographyposition;
+    }
     $data->id = $DB->insert_record('znaniumcombook', $data);
 
     $completiontimeexpected = !empty($data->completionexpected) ? $data->completionexpected : null;
@@ -105,10 +112,9 @@ function znaniumcombook_update_instance($data, $mform) {
 
     $data->bookid = $data->book['id'];
     $data->bookdescription = $data->book['description'];
+    unset($data->book);
     $data->bookpage = $data->page;
     $data->timemodified = time();
-    $data->showbibliography = isset($data->showbibliography) ?: $config->showbibliography;
-    $data->bibliographyposition = isset($data->bibliographyposition) ?: $config->bibliographyposition;
     $data->id = $data->instance;
 
     $DB->update_record('znaniumcombook', $data);
@@ -164,18 +170,21 @@ function znaniumcombook_get_coursemodule_info($coursemodule) {
 
     //note: there should be a way to differentiate links from normal resources
     $info->icon = '';
-    $fullurl = "$CFG->wwwroot/mod/znaniumcombook/view.php?id=$coursemodule->id";
+    $fullurl = new moodle_url('/mod/znaniumcombook/view.php', array(
+        'id' => $coursemodule->id,
+    ));
     $info->onclick = "window.open('$fullurl'); return false;";
+    $info->url = $fullurl;
 
     $info->content = '';
-    if ($book->showbibliography && $book->bibliographyposition === ZNANIUMCOMBOOK_BIBLIOGRAPHY_POSITION_BEFORE) {
+    if ($book->showbibliography && $book->bibliographyposition == ZNANIUMCOMBOOK_BIBLIOGRAPHY_POSITION_BEFORE) {
         $info->content .= '<div>' . htmlentities($book->bookdescription) . '</div>';
     }
     if ($coursemodule->showdescription) {
         // Convert intro to html. Do not filter cached version, filters run at display time.
-        $info->content = format_module_intro('znaniumcombook', $book, $coursemodule->id, false);
+        $info->content .= format_module_intro('znaniumcombook', $book, $coursemodule->id, false);
     }
-    if ($book->showbibliography && $book->bibliographyposition === ZNANIUMCOMBOOK_BIBLIOGRAPHY_POSITION_AFTER) {
+    if ($book->showbibliography && $book->bibliographyposition == ZNANIUMCOMBOOK_BIBLIOGRAPHY_POSITION_AFTER) {
         $info->content .= '<div>' . htmlentities($book->bookdescription) . '</div>';
     }
 

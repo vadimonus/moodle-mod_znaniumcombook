@@ -44,6 +44,7 @@ $string['select_book_btn'] = 'Select';
 $string['paginator_prev'] = '« Previous';
 $string['paginator_next'] = 'Next »';
 $string['paginator_dots'] = '...';
+$string['clicktoopen'] = 'Go';
 
 
 $string['pluginadministration'] = 'Book from Znanium DL administration';
