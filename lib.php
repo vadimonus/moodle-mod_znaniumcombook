@@ -192,6 +192,59 @@ function znaniumcombook_get_coursemodule_info($coursemodule) {
 }
 
 /**
+ * Return a list of page types
+ * @param string $pagetype current page type
+ * @param stdClass $parentcontext Block's parent context
+ * @param stdClass $currentcontext Current context of block
+ */
+function znaniumcombook_page_type_list($pagetype, $parentcontext, $currentcontext) {
+    return array();
+}
+
+/**
+ * Export module resource contents
+ *
+ * @return array of file content
+ */
+function znaniumcombook_export_contents($cm, $baseurl) {
+    global $CFG, $DB;
+    $contents = array();
+    $context = context_module::instance($cm->id);
+
+    $course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
+    $book = $DB->get_record('znaniumcombook', array('id' => $cm->instance), '*', MUST_EXIST);
+
+    if (!has_capability('mod/znaniumcombook:view', $context)) {
+        return array();
+    };
+
+    $params = array(
+        'contextid' => $context->id,
+        'documentid' => $book->bookid,
+    );
+    if ($book->bookpage) {
+        $params['page'] = $book->bookpage;
+    }
+    $url = new moodle_url('/blocks/znanium_com/redirect.php', $params);
+
+    $file = array();
+    $file['type'] = 'url';
+    $file['filename'] = 'book';
+    $file['filepath'] = null;
+    $file['filesize'] = 0;
+    $file['fileurl'] = $url;
+    $file['timecreated'] = null;
+    $file['timemodified'] = $book->timemodified;
+    $file['sortorder'] = null;
+    $file['userid'] = null;
+    $file['author'] = null;
+    $file['license'] = null;
+    $contents[] = $file;
+
+    return $contents;
+}
+
+/**
  * Mark the activity completed (if required) and trigger the course_module_viewed event.
  *
  * @param  stdClass $instance   znaniumcombook object
