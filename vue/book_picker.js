@@ -6,13 +6,14 @@ import modal from './book_picker_modal';
 
 export function init() {
 
-    const appSelector = '#fgroup_id_book';
     const bookIdSelector = '#id_book_id';
     const bookDescriptionSelector = '#id_book_description';
     const buttonSelector = '#id_book_select';
 
+    let appElement = $(bookIdSelector).parent().get(0);
+
     new Vue({
-        el: appSelector,
+        el: appElement,
         name: 'BookPickerInput',
         data: {},
         computed: {
