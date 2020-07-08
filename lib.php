@@ -76,7 +76,7 @@ function znaniumcombook_reset_userdata($data) {
  * @return int new module instance id
  */
 function znaniumcombook_add_instance($data, $mform) {
-    global $DB;
+    global $CFG, $DB;
 
     $config = get_config('znaniumcombook');
 
@@ -94,7 +94,9 @@ function znaniumcombook_add_instance($data, $mform) {
     $data->id = $DB->insert_record('znaniumcombook', $data);
 
     $completiontimeexpected = !empty($data->completionexpected) ? $data->completionexpected : null;
-    \core_completion\api::update_completion_date_event($data->coursemodule, 'url', $data->id, $completiontimeexpected);
+    if ($CFG->version > 2017051500.00) {
+        \core_completion\api::update_completion_date_event($data->coursemodule, 'url', $data->id, $completiontimeexpected);
+    }
 
     return $data->id;
 }
@@ -106,7 +108,7 @@ function znaniumcombook_add_instance($data, $mform) {
  * @return bool true
  */
 function znaniumcombook_update_instance($data, $mform) {
-    global $DB;
+    global $CFG, $DB;
 
     $config = get_config('znaniumcombook');
 
@@ -120,7 +122,9 @@ function znaniumcombook_update_instance($data, $mform) {
     $DB->update_record('znaniumcombook', $data);
 
     $completiontimeexpected = !empty($data->completionexpected) ? $data->completionexpected : null;
-    \core_completion\api::update_completion_date_event($data->coursemodule, 'znaniumcombook', $data->id, $completiontimeexpected);
+    if ($CFG->version > 2017051500.00) {
+        \core_completion\api::update_completion_date_event($data->coursemodule, 'znaniumcombook', $data->id, $completiontimeexpected);
+    }
 
     return true;
 }
@@ -131,14 +135,16 @@ function znaniumcombook_update_instance($data, $mform) {
  * @return bool true
  */
 function znaniumcombook_delete_instance($id) {
-    global $DB;
+    global $CFG, $DB;
 
     if (!$book = $DB->get_record('znaniumcombook', array('id' => $id))) {
         return false;
     }
 
     $cm = get_coursemodule_from_instance('znaniumcombook', $id);
-    \core_completion\api::update_completion_date_event($cm->id, 'znaniumcombook', $id, null);
+    if ($CFG->version > 2017051500.00) {
+        \core_completion\api::update_completion_date_event($cm->id, 'znaniumcombook', $id, null);
+    }
 
     // note: all context files are deleted automatically
     $DB->delete_records('znaniumcombook', array('id' => $id));
@@ -157,7 +163,7 @@ function znaniumcombook_delete_instance($id) {
  * @return cached_cm_info info
  */
 function znaniumcombook_get_coursemodule_info($coursemodule) {
-    global $CFG, $DB;
+    global $DB;
 
     if (!$book = $DB->get_record('znaniumcombook', array('id' => $coursemodule->instance),
         'id, name, intro, introformat, bookdescription, showbibliography, bibliographyposition')
