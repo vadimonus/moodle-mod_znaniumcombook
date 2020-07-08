@@ -22,29 +22,27 @@
  * @license LICENSE
  */
 
-$string['modulename'] = 'Book from Znanium DL';
-$string['modulename_help'] = 'Using this module, you can add to the course books and other publications from the Znanium digital library. When redirecting to digital library, you will not need to re-enter your username and password. In the course element settings, you can specify a specific page that will open in the book.';
-$string['modulenameplural'] = 'Books from Znanium DL';
-$string['pluginname'] = 'Book from Znanium DL';
-$string['privacy:metadata'] = 'The plugin does not store any personal data.';
-
-$string['modal_title'] = 'Publication search';
-$string['search_error'] = 'Error occurred';
-$string['searching'] = '... searching ...';
-$string['search_btn'] = 'Search';
-$string['nothing_found'] = 'No results found';
+$string['clicktoopen'] = 'Go';
+$string['cover_alt'] = 'Cover';
+$string['mod_form_bibliography_position'] = 'Bibliography position';
+$string['mod_form_bibliography_position_after'] = 'After description';
+$string['mod_form_bibliography_position_before'] = 'Before description';
 $string['mod_form_book'] = 'Publication';
 $string['mod_form_page'] = 'Page number';
 $string['mod_form_show_bibliography'] = 'Display bibliography on course page';
-$string['mod_form_bibliography_position'] = 'Bibliography position';
-$string['mod_form_bibliography_position_before'] = 'Before description';
-$string['mod_form_bibliography_position_after'] = 'After description';
+$string['modal_title'] = 'Publication search';
+$string['modulename'] = 'Book from Znanium DL';
+$string['modulename_help'] = 'Using this module, you can add to the course books and other publications from the Znanium digital library. When redirecting to digital library, you will not need to re-enter your username and password. In the course element settings, you can specify a specific page that will open in the book.';
+$string['modulenameplural'] = 'Books from Znanium DL';
+$string['nothing_found'] = 'No results found';
 $string['open_book_picker_btn'] = 'Select';
-$string['select_book_btn'] = 'Select';
-$string['paginator_prev'] = '« Previous';
-$string['paginator_next'] = 'Next »';
 $string['paginator_dots'] = '...';
-$string['clicktoopen'] = 'Go';
-
-
+$string['paginator_next'] = 'Next »';
+$string['paginator_prev'] = '« Previous';
 $string['pluginadministration'] = 'Book from Znanium DL administration';
+$string['pluginname'] = 'Book from Znanium DL';
+$string['privacy:metadata'] = 'The plugin does not store any personal data.';
+$string['search_btn'] = 'Search';
+$string['search_error'] = 'Error occurred';
+$string['searching'] = '... searching ...';
+$string['select_book_btn'] = 'Select';

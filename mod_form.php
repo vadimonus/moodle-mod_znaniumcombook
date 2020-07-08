@@ -76,7 +76,7 @@ class mod_znaniumcombook_mod_form extends moodleform_mod {
 
         $PAGE->requires->js_call_amd('mod_znaniumcombook/bookpicker-lazy', 'init');
 
-        $mform->addElement('text', 'page', 'Номер страницы', array('size' => '5',));
+        $mform->addElement('text', 'page', get_string('mod_form_page', 'znaniumcombook'), array('size' => '5',));
         $mform->setType('page', PARAM_INT);
 
         // Do not display for single module course format.

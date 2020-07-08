@@ -1,7 +1,7 @@
 <template>
     <div class="row align-items-center my-3">
         <div class="col-auto">
-            <img :src="publication.cover" alt="Обложка" class="border border-dark"/>
+            <img :src="publication.cover" :alt="strings.cover_alt" class="border border-dark"/>
         </div>
         <div class="col" v-text="publication.biblio_record"></div>
         <div class="col-auto">
