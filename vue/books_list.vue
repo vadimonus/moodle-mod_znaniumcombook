@@ -24,7 +24,12 @@
 
 <template>
     <div class="books-list">
-        <book-list-item v-for="publication in currentPage" :key="publication.id" :publication="publication"></book-list-item>
+        <book-list-item
+                v-for="publication in currentPage"
+                :key="publication.id"
+                :publication="publication"
+                @book-selected="$emit('book-selected')"
+        ></book-list-item>
     </div>
 </template>
 

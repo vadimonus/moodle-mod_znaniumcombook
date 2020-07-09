@@ -56,7 +56,6 @@ export function init() {
                 this.modal.show(function () {
                     $(buttonSelector).removeAttr('disabled');
                 });
-                this.modal;
             },
             hideModal: function () {
                 if (this.modal) {

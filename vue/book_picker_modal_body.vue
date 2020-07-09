@@ -23,13 +23,13 @@
 */
 
 <template>
-    <div>
+    <div class="znaniumcombook_book_picker_modal_body">
         <search-form></search-form>
         <div v-if="searchError" class="text-center text-danger" v-text="strings.search_error"></div>
         <div v-else-if="searching" class="text-center"  v-text="strings.searching"></div>
         <div v-else-if="pagesTotal > 0">
             <paginator></paginator>
-            <books-list></books-list>
+            <books-list @book-selected="$emit('book-selected')"></books-list>
             <paginator></paginator>
         </div>
         <div v-else-if="queryString.length > 0" class="text-center" v-text="strings.nothing_found"></div>
@@ -43,7 +43,7 @@
     import Paginator from './paginator';
 
     export default {
-        name: 'BookPickerModal',
+        name: 'BookPickerModalBody',
         components: {
             Paginator,
             BooksList,

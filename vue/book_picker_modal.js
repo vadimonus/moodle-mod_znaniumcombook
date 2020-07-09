@@ -49,7 +49,7 @@ export default class BookPickerModal {
         }.bind(this));
 
         this.modal.getRoot().on(ModalEvents.shown, function() {
-            const template = '<div id="book-picker-modal-body"><book-picker-modal-body></book-picker-modal-body></div>';
+            const template = '<div id="book-picker-modal-body"><book-picker-modal-body @book-selected="onBookSelected"></book-picker-modal-body></div>';
             this.modal.setBody(template);
 
             this.vue = new Vue({
@@ -57,6 +57,11 @@ export default class BookPickerModal {
                 name: 'BookPickerModalWrapper',
                 components: {
                     BookPickerModalBody,
+                },
+                methods: {
+                    onBookSelected: function () {
+                        this.modal.hide();
+                    }.bind(this),
                 },
                 parent: this.parentVue,
             });

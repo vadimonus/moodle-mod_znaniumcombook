@@ -57,7 +57,7 @@
         methods: {
             selectBook() {
                 this.$store.commit('setSelectedBook', this.publication);
-                this.$root.hideModal();
+                this.$emit('book-selected');
             },
         },
     }

@@ -55,6 +55,7 @@ export default new Vuex.Store({
         selectedBook: {
             id: null,
             description: '',
+            cover: '',
         },
         searching: false,
         queryString: false,
@@ -78,6 +79,7 @@ export default new Vuex.Store({
         setSelectedBook(state, publication) {
             state.selectedBook.id = publication.id;
             state.selectedBook.description = publication.biblio_record;
+            state.selectedBook.cover = publication.cover;
         },
         setSearching(state, value) {
             state.searching = value;
