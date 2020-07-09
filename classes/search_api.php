@@ -32,10 +32,6 @@ require_once($CFG->libdir . '/filelib.php');
 
 /**
  * Search api class
- *
- * @package    repository_znanium_com
- * @copyright  2020 Vadim Dvorovenko
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class search_api extends \external_api {
 
@@ -71,6 +67,8 @@ class search_api extends \external_api {
     }
 
     /**
+     * Searches for book
+     *
      * @param string $searchquery
      * @param int $page
      * @return array
@@ -91,24 +89,17 @@ class search_api extends \external_api {
     }
 
     /**
-     * @param int $id
-     * @return array
-     */
-    public function get_book_info($id) {
-        $params = array(
-            'id' => $id,
-            'domain' => $this->domain,
-        );
-        $json = $this->curl->get($this->infourl, $params);
-        $response = json_decode($json, true);
-        return $response;
-    }
-
-    /**
      * Clean response
+     * If a response attribute is unknown from the description, we just ignore the attribute.
+     * If a response attribute is incorrect, invalid_response_exception is thrown.
+     * Note: this function is similar to validate parameters, however it is distinct because
+     * parameters validation must be distinct from cleaning return values.
+     *
+     * @param external_description $description description of the return values
+     * @param mixed $response the actual response
+     * @return mixed response with added defaults for optional items, invalid_response_exception thrown if any problem found
      */
     public static function clean_returnvalue(\external_description $description, $response) {
         return $response;
     }
-
 }

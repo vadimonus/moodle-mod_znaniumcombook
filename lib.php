@@ -32,6 +32,7 @@ require_once($CFG->libdir . '/completionlib.php');
 
 /**
  * List of features supported in module
+ *
  * @param string $feature FEATURE_xx constant for requested feature
  * @return bool|null True if module supports feature, false if not, null if doesn't know
  */
@@ -63,15 +64,17 @@ function znaniumcombook_supports($feature) {
 
 /**
  * This function is used by the reset_course_userdata function in moodlelib.
- * @param $data the data submitted from the reset course.
+ *
+ * @param object $data the data submitted from the reset course.
  * @return array status array
  */
 function znaniumcombook_reset_userdata($data) {
     return array();
 }
-//
+
 /**
  * Add module instance.
+ *
  * @param object $data
  * @param object $mform
  * @return int new module instance id
@@ -158,7 +161,7 @@ function znaniumcombook_delete_instance($id) {
  * "extra" information that may be needed when printing
  * this activity in a course listing.
  *
- * See {@link get_array_of_activities()} in course/lib.php
+ * See get_array_of_activities in course/lib.php
  *
  * @param object $coursemodule
  * @return cached_cm_info info
@@ -211,6 +214,8 @@ function znaniumcombook_page_type_list($pagetype, $parentcontext, $currentcontex
 /**
  * Export module resource contents
  *
+ * @param  stdClass $cm Course module object
+ * @param  string $baseurl Base URL for file downloads
  * @return array of file content
  */
 function znaniumcombook_export_contents($cm, $baseurl) {

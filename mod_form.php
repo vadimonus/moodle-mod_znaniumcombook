@@ -37,6 +37,9 @@ require_once($CFG->dirroot . '/mod/znaniumcombook/lib.php');
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class mod_znaniumcombook_mod_form extends moodleform_mod {
+    /**
+     * Define this form - called by the parent constructor
+     */
     function definition() {
         global $CFG, $PAGE;
         $mform = $this->_form;
@@ -111,18 +114,29 @@ class mod_znaniumcombook_mod_form extends moodleform_mod {
         $this->add_action_buttons();
     }
 
-    function data_preprocessing(&$default_values) {
-        if (!empty($default_values['bookid'])) {
-            $default_values['book']['id'] = $default_values['bookid'];
+    /**
+     * Allows the plugin to update the defaultvalues passed in to
+     * the settings form (needed to set up draft areas for editor
+     * and filemanager elements)
+     * @param array $defaultvalues
+     */
+    function data_preprocessing(&$defaultvalues) {
+        if (!empty($defaultvalues['bookid'])) {
+            $defaultvalues['book']['id'] = $defaultvalues['bookid'];
         }
-        if (!empty($default_values['bookdescription'])) {
-            $default_values['book']['description'] = $default_values['bookdescription'];
+        if (!empty($defaultvalues['bookdescription'])) {
+            $defaultvalues['book']['description'] = $defaultvalues['bookdescription'];
         }
-        if (!empty($default_values['bookpage'])) {
-            $default_values['page'] = $default_values['bookpage'];
+        if (!empty($defaultvalues['bookpage'])) {
+            $defaultvalues['page'] = $defaultvalues['bookpage'];
         }
     }
 
+    /**
+     * Perform minimal validation on the settings form
+     * @param array $data
+     * @param array $files
+     */
     function validation($data, $files) {
         $errors = parent::validation($data, $files);
 

@@ -28,12 +28,7 @@ namespace mod_znaniumcombook\privacy;
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Book from znanium.com module
- *
- * @package mod_znaniumcombook
- * @copyright 2020 Vadim Dvorovenko
- * @copyright 2020 ООО «ЗНАНИУМ»
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * Privacy provider
  */
 class provider implements \core_privacy\local\metadata\null_provider {
     /**

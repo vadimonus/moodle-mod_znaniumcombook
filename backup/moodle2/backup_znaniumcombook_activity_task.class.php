@@ -28,12 +28,7 @@ defined('MOODLE_INTERNAL') || die;
 require_once($CFG->dirroot . '/mod/znaniumcombook/backup/moodle2/backup_znaniumcombook_stepslib.php');
 
 /**
- * Book from znanium.com module
- *
- * @package mod_znaniumcombook
- * @copyright 2020 Vadim Dvorovenko
- * @copyright 2020 ООО «ЗНАНИУМ»
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * Backup task
  */
 class backup_znaniumcombook_activity_task extends backup_activity_task {
 
@@ -53,6 +48,8 @@ class backup_znaniumcombook_activity_task extends backup_activity_task {
     /**
      * Code the transformations to perform in the activity in
      * order to get transportable (encoded) links
+     * @param string $content
+     * @return string
      */
     static public function encode_content_links($content) {
         global $CFG;

@@ -26,15 +26,15 @@
 defined('MOODLE_INTERNAL') || die;
 
 /**
- * Book from znanium.com module
- *
- * @package mod_znaniumcombook
- * @copyright 2020 Vadim Dvorovenko
- * @copyright 2020 ООО «ЗНАНИУМ»
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * Backup task step
  */
 class backup_znaniumcombook_activity_structure_step extends backup_activity_structure_step {
 
+    /**
+     * Define the structure to be processed by this backup step.
+     *
+     * @return backup_nested_element
+     */
     protected function define_structure() {
 
         // Module stores no user info.

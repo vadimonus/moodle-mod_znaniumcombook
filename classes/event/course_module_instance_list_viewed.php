@@ -28,14 +28,8 @@ namespace mod_znaniumcombook\event;
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Book from znanium.com module
- *
- * @package mod_znaniumcombook
- * @copyright 2020 Vadim Dvorovenko
- * @copyright 2020 ООО «ЗНАНИУМ»
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * List view event
  */
-
 class course_module_instance_list_viewed extends \core\event\course_module_instance_list_viewed {
 
 }

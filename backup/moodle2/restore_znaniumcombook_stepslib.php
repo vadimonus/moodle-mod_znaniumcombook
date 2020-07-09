@@ -26,14 +26,14 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Define all the restore steps that will be used by the restore_znaniumcombook_activity_task
- */
-
-/**
- * Structure step to restore one znaniumcombook activity
+ * Restore task step
  */
 class restore_znaniumcombook_activity_structure_step extends restore_activity_structure_step {
 
+    /**
+     * Adds support for the 'activity' path that is common to all the activities
+     * and will be processed globally here
+     */
     protected function define_structure() {
 
         $paths = array();
@@ -43,6 +43,10 @@ class restore_znaniumcombook_activity_structure_step extends restore_activity_st
         return $this->prepare_activity_structure($paths);
     }
 
+    /**
+     * Restores book
+     * @param array|object $data
+     */
     protected function process_znaniumcombook($data) {
         global $DB;
 
@@ -55,8 +59,14 @@ class restore_znaniumcombook_activity_structure_step extends restore_activity_st
         $this->apply_activity_instance($newitemid);
     }
 
+    /**
+     * This method will be executed after the whole structure step have been processed
+     *
+     * After execution method for code needed to be executed after the whole structure
+     * has been processed. Useful for cleaning tasks, files process and others. Simply
+     * overwrite in in your steps if needed
+     */
     protected function after_execute() {
-        // Add znaniumcombook related files, no need to match by itemname (just internally handled context)
         $this->add_related_files('mod_znaniumcombook', 'intro', null);
     }
 }

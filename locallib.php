@@ -73,7 +73,6 @@ function znaniumcombook_print_header($znaniumcombook, $cm, $course) {
  * @param object $znaniumcombook
  * @param object $cm
  * @param object $course
- * @param bool $notused This variable is no longer used
  * @return void
  */
 function znaniumcombook_print_heading($znaniumcombook, $cm, $course) {
@@ -86,7 +85,6 @@ function znaniumcombook_print_heading($znaniumcombook, $cm, $course) {
  * @param object $book
  * @param object $cm
  * @param object $course
- * @param bool $ignoresettings print even if not specified in modedit
  * @return void
  */
 function znaniumcombook_print_intro($book, $cm, $course) {
