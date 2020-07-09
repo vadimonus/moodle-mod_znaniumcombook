@@ -28,7 +28,6 @@ defined('MOODLE_INTERNAL') || die;
 if ($ADMIN->fulltree) {
     require_once($CFG->dirroot . '/mod/znaniumcombook/lib.php');
 
-    //--- modedit defaults -----------------------------------------------------------------------------------
     $settings->add(new admin_setting_heading(
         'znaniumcombookmodeditdefaults',
         get_string('modeditdefaults', 'admin'),

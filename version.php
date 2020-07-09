@@ -26,8 +26,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->version = 2020070801; // The current module version (Date: YYYYMMDDXX)
-$plugin->requires = 2016120500; // Requires Moodle 3.2 for AMD Modal
-$plugin->component = 'mod_znaniumcombook';  // Full name of the plugin (used for diagnostics)
+$plugin->requires = 2016120500; // Requires Moodle 3.2.
+$plugin->component = 'mod_znaniumcombook';  // Full name of the plugin.
 $plugin->dependencies = array(
     'block_znanium_com' => 2020060601,
 );

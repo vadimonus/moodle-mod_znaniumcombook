@@ -54,14 +54,14 @@ class backup_znaniumcombook_activity_task extends backup_activity_task {
     static public function encode_content_links($content) {
         global $CFG;
 
-        $base = preg_quote($CFG->wwwroot.'/mod/znaniumcombook','#');
+        $base = preg_quote($CFG->wwwroot . '/mod/znaniumcombook', '#');
 
-        // Access a list of all links in a course
+        // Access a list of all links in a course.
         $pattern = '#('.$base.'/index\.php\?id=)([0-9]+)#';
         $replacement = '$@ZNANIUMCOMBOOKINDEX*$2@$';
         $content = preg_replace($pattern, $replacement, $content);
 
-        // Access the link supplying a course module id
+        // Access the link supplying a course module id.
         $pattern = '#('.$base.'/view\.php\?id=)([0-9]+)#';
         $replacement = '$@ZNANIUMCOMBOOKVIEWBYID*$2@$';
         $content = preg_replace($pattern, $replacement, $content);

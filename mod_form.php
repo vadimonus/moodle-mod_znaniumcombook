@@ -40,12 +40,12 @@ class mod_znaniumcombook_mod_form extends moodleform_mod {
     /**
      * Define this form - called by the parent constructor
      */
-    function definition() {
+    public function definition() {
         global $CFG, $PAGE;
         $mform = $this->_form;
         $config = get_config('znaniumcombook');
 
-        //-------------------------------------------------------
+        // -------------------------------------------------------
         $mform->addElement('header', 'general', get_string('general', 'form'));
         $mform->addElement('text', 'name', get_string('name'), array('size' => '48'));
         if (!empty($CFG->formatstringstriptags)) {
@@ -81,7 +81,7 @@ class mod_znaniumcombook_mod_form extends moodleform_mod {
 
         $PAGE->requires->js_call_amd('mod_znaniumcombook/bookpicker-lazy', 'init');
 
-        $mform->addElement('text', 'page', get_string('mod_form_page', 'znaniumcombook'), array('size' => '5',));
+        $mform->addElement('text', 'page', get_string('mod_form_page', 'znaniumcombook'), array('size' => '5'));
         $mform->setType('page', PARAM_INT);
 
         // Do not display for single module course format.
@@ -94,23 +94,24 @@ class mod_znaniumcombook_mod_form extends moodleform_mod {
         $attributes['rows'] = 5;
         $element->setAttributes($attributes);
 
-        //-------------------------------------------------------
+        // -------------------------------------------------------
         $mform->addElement('header', 'optionssection', get_string('appearance'));
 
         $bibliographypositions = array(
             ZNANIUMCOMBOOK_BIBLIOGRAPHY_POSITION_BEFORE => get_string('mod_form_bibliography_position_before', 'znaniumcombook'),
             ZNANIUMCOMBOOK_BIBLIOGRAPHY_POSITION_AFTER => get_string('mod_form_bibliography_position_after', 'znaniumcombook'),
         );
-        $mform->addElement('select', 'bibliographyposition', get_string('mod_form_bibliography_position', 'znaniumcombook'), $bibliographypositions);
+        $mform->addElement('select', 'bibliographyposition',
+            get_string('mod_form_bibliography_position', 'znaniumcombook'), $bibliographypositions);
         $mform->setType('bibliographyposition', PARAM_INT);
         $mform->setDefault('bibliographyposition', $config->bibliographyposition);
         $mform->disabledIf('bibliographyposition', 'showbibliography', 'notchecked');
         $mform->disabledIf('bibliographyposition', 'showdescription', 'notchecked');
 
-        //-------------------------------------------------------
+        // -------------------------------------------------------
         $this->standard_coursemodule_elements();
 
-        //-------------------------------------------------------
+        // -------------------------------------------------------
         $this->add_action_buttons();
     }
 
@@ -120,7 +121,7 @@ class mod_znaniumcombook_mod_form extends moodleform_mod {
      * and filemanager elements)
      * @param array $defaultvalues
      */
-    function data_preprocessing(&$defaultvalues) {
+    public function data_preprocessing(&$defaultvalues) {
         if (!empty($defaultvalues['bookid'])) {
             $defaultvalues['book']['id'] = $defaultvalues['bookid'];
         }
@@ -137,7 +138,7 @@ class mod_znaniumcombook_mod_form extends moodleform_mod {
      * @param array $data
      * @param array $files
      */
-    function validation($data, $files) {
+    public function validation($data, $files) {
         $errors = parent::validation($data, $files);
 
         if (empty($data['book']['id'])) {

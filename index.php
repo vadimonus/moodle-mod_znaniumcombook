@@ -25,9 +25,9 @@
 
 require('../../config.php');
 
-$id = required_param('id', PARAM_INT); // course id
+$id = required_param('id', PARAM_INT); // Course id.
 
-$course = $DB->get_record('course', array('id'=>$id), '*', MUST_EXIST);
+$course = $DB->get_record('course', array('id' => $id), '*', MUST_EXIST);
 
 require_course_login($course, true);
 $PAGE->set_pagelayout('incourse');
@@ -71,10 +71,6 @@ if ($usesections) {
     $table->align = array ('left', 'left', 'left');
 }
 
-// временно
-get_fast_modinfo($course->id, 0, true);
-// временно
-
 $modinfo = get_fast_modinfo($course);
 $currentsection = '';
 foreach ($books as $book) {
@@ -100,7 +96,7 @@ foreach ($books as $book) {
         $icon = $OUTPUT->pix_icon($cm->icon, get_string('modulename', $cm->modname)) . ' ';
     }
 
-    $class = $book->visible ? '' : 'class="dimmed"'; // hidden modules are dimmed
+    $class = $book->visible ? '' : 'class="dimmed"'; // Hidden modules are dimmed.
     $table->data[] = array (
         $printsection,
         "<a $class $extra href=\"view.php?id=$cm->id\">".$icon.format_string($book->name)."</a>",

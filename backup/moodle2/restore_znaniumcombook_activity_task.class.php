@@ -25,7 +25,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-require_once($CFG->dirroot . '/mod/znaniumcombook/backup/moodle2/restore_znaniumcombook_stepslib.php'); // Because it exists (must)
+require_once($CFG->dirroot . '/mod/znaniumcombook/backup/moodle2/restore_znaniumcombook_stepslib.php');
 
 /**
  * Restore task
@@ -36,14 +36,14 @@ class restore_znaniumcombook_activity_task extends restore_activity_task {
      * Define (add) particular settings this activity can have
      */
     protected function define_my_settings() {
-        // No particular settings for this activity
+        // No particular settings for this activity.
     }
 
     /**
      * Define (add) particular steps this activity can have
      */
     protected function define_my_steps() {
-        // znaniumcombook only has one structure step
+        // Module only has one structure step.
         $this->add_step(new restore_znaniumcombook_activity_structure_step('znaniumcombook_structure', 'znaniumcombook.xml'));
     }
 

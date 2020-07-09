@@ -127,7 +127,8 @@ function znaniumcombook_update_instance($data, $mform) {
 
     $completiontimeexpected = !empty($data->completionexpected) ? $data->completionexpected : null;
     if ($CFG->version > 2017051500.00) {
-        \core_completion\api::update_completion_date_event($data->coursemodule, 'znaniumcombook', $data->id, $completiontimeexpected);
+        \core_completion\api::update_completion_date_event($data->coursemodule, 'znaniumcombook',
+            $data->id, $completiontimeexpected);
     }
 
     return true;
@@ -150,7 +151,7 @@ function znaniumcombook_delete_instance($id) {
         \core_completion\api::update_completion_date_event($cm->id, 'znaniumcombook', $id, null);
     }
 
-    // note: all context files are deleted automatically
+    // All context files are deleted automatically.
     $DB->delete_records('znaniumcombook', array('id' => $id));
 
     return true;
@@ -172,13 +173,12 @@ function znaniumcombook_get_coursemodule_info($coursemodule) {
     if (!$book = $DB->get_record('znaniumcombook', array('id' => $coursemodule->instance),
         'id, name, intro, introformat, bookdescription, showbibliography, bibliographyposition')
     ) {
-        return NULL;
+        return null;
     }
 
     $info = new cached_cm_info();
     $info->name = $book->name;
 
-    //note: there should be a way to differentiate links from normal resources
     $info->icon = '';
     $fullurl = new moodle_url('/mod/znaniumcombook/view.php', array(
         'id' => $coursemodule->id,

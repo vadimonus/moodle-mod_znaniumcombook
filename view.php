@@ -27,7 +27,7 @@ require('../../config.php');
 require_once("$CFG->dirroot/mod/znaniumcombook/lib.php");
 require_once("$CFG->dirroot/mod/znaniumcombook/locallib.php");
 
-$id = required_param('id', PARAM_INT);        // Course module ID
+$id = required_param('id', PARAM_INT); // Course module ID.
 $forceview = optional_param('forceview', 0, PARAM_BOOL);
 
 $cm = get_coursemodule_from_id('znaniumcombook', $id, 0, false, MUST_EXIST);
