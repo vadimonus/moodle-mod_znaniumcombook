@@ -22,61 +22,61 @@ module.exports = (env, options) => {
                     test: /\.css$/,
                     use: [
                         'vue-style-loader',
-                        'css-loader'
+                        'css-loader',
                     ],
                 },
                 {
                     test: /\.vue$/,
                     loader: 'vue-loader',
                     options: {
-                        loaders: {}
+                        loaders: {},
                         // Other vue-loader options go here
-                    }
+                    },
                 },
                 {
                     test: /\.js$/,
                     loader: 'babel-loader',
-                    exclude: /node_modules/
-                }
-            ]
+                    exclude: /node_modules/,
+                },
+            ],
         },
         resolve: {
             alias: {
-                'vue$': 'vue/dist/vue.esm.js'
+                'vue$': 'vue/dist/vue.esm.js',
             },
-            extensions: ['*', '.js', '.vue', '.json']
+            extensions: ['*', '.js', '.vue', '.json'],
         },
         devtool: 'inline-source-map',
         plugins: [
             new VueLoaderPlugin(),
             new WebpackCopyAfterBuildPlugin({
                 'bookpicker': '../../amd/src/bookpicker-lazy.js',
-            })
+            }),
 
         ],
         watchOptions: {
-            ignored: /node_modules/
+            ignored: /node_modules/,
         },
         externals: {
             'core/ajax': {
-                amd: 'core/ajax'
+                amd: 'core/ajax',
             },
             'core/modal_factory': {
-                amd: 'core/modal_factory'
+                amd: 'core/modal_factory',
             },
             'core/modal_events': {
-                amd: 'core/modal_events'
+                amd: 'core/modal_events',
             },
             'core/localstorage': {
-                amd: 'core/localstorage'
+                amd: 'core/localstorage',
             },
             'core/notification': {
-                amd: 'core/notification'
+                amd: 'core/notification',
             },
             'jquery': {
-                amd: 'jquery'
-            }
-        }
+                amd: 'jquery',
+            },
+        },
     };
 
     if (options.mode === 'production') {
@@ -84,8 +84,8 @@ module.exports = (env, options) => {
         exports.devtool = '';
         exports.plugins = (exports.plugins || []).concat([
             new webpack.LoaderOptionsPlugin({
-                minimize: true
-            })
+                minimize: true,
+            }),
         ]);
         exports.optimization = {
             minimizer: [
@@ -94,11 +94,13 @@ module.exports = (env, options) => {
                     parallel: true,
                     sourceMap: true,
                     terserOptions: {
-                        // https://github.com/webpack-contrib/terser-webpack-plugin#terseroptions
-                    }
+                        output: {
+                            comments: false,
+                        },
+                    },
                 }),
-            ]
-        }
+            ],
+        };
     }
 
     return exports;
