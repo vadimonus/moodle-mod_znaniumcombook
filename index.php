@@ -17,9 +17,10 @@
 /**
  * Book from znanium.com module
  *
- * @package    mod_znaniumcombook
- * @copyright COPYRIGHT
- * @license LICENSE
+ * @package mod_znaniumcombook
+ * @copyright 2020 Vadim Dvorovenko
+ * @copyright 2020 ООО «ЗНАНИУМ»
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 require('../../config.php');

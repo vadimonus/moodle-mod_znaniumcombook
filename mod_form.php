@@ -17,9 +17,10 @@
 /**
  * Book from znanium.com module
  *
- * @package    mod_znaniumcombook
- * @copyright COPYRIGHT
- * @license LICENSE
+ * @package mod_znaniumcombook
+ * @copyright 2020 Vadim Dvorovenko
+ * @copyright 2020 ООО «ЗНАНИУМ»
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die;
@@ -30,9 +31,10 @@ require_once($CFG->dirroot . '/mod/znaniumcombook/lib.php');
 /**
  * Book from znanium.com module
  *
- * @package    mod_znaniumcombook
- * @copyright COPYRIGHT
- * @license LICENSE
+ * @package mod_znaniumcombook
+ * @copyright 2020 Vadim Dvorovenko
+ * @copyright 2020 ООО «ЗНАНИУМ»
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class mod_znaniumcombook_mod_form extends moodleform_mod {
     function definition() {

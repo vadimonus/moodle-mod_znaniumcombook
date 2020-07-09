@@ -18,8 +18,9 @@
  * Book from znanium.com module
  *
  * @package mod_znaniumcombook
- * @copyright COPYRIGHT
- * @license LICENSE
+ * @copyright 2020 Vadim Dvorovenko
+ * @copyright 2020 ООО «ЗНАНИУМ»
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();

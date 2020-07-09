@@ -15,11 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Znanium.com books repository
+ * Book from znanium.com module
  *
- * @package    repository_znanium_com
- * @copyright  2020 Vadim Dvorovenko
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package mod_znaniumcombook
+ * @copyright 2020 Vadim Dvorovenko
+ * @copyright 2020 ООО «ЗНАНИУМ»
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace mod_znaniumcombook;

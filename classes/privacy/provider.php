@@ -17,19 +17,23 @@
 /**
  * Book from znanium.com module
  *
- * @package    mod_znaniumcombook
- * @copyright COPYRIGHT
- * @license LICENSE
+ * @package mod_znaniumcombook
+ * @copyright 2020 Vadim Dvorovenko
+ * @copyright 2020 ООО «ЗНАНИУМ»
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 namespace mod_znaniumcombook\privacy;
 
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Activity  module for znanium.com book
+ * Book from znanium.com module
  *
- * @copyright COPYRIGHT
- * @license LICENSE
+ * @package mod_znaniumcombook
+ * @copyright 2020 Vadim Dvorovenko
+ * @copyright 2020 ООО «ЗНАНИУМ»
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements \core_privacy\local\metadata\null_provider {
     /**

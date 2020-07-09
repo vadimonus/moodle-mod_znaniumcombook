@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -18,9 +17,10 @@
 /**
  * Book from znanium.com module
  *
- * @package    mod_znaniumcombook
- * @copyright COPYRIGHT
- * @license LICENSE
+ * @package mod_znaniumcombook
+ * @copyright 2020 Vadim Dvorovenko
+ * @copyright 2020 ООО «ЗНАНИУМ»
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die;
@@ -30,9 +30,10 @@ require_once($CFG->dirroot . '/mod/znaniumcombook/backup/moodle2/backup_znaniumc
 /**
  * Book from znanium.com module
  *
- * @package    mod_znaniumcombook
- * @copyright COPYRIGHT
- * @license LICENSE
+ * @package mod_znaniumcombook
+ * @copyright 2020 Vadim Dvorovenko
+ * @copyright 2020 ООО «ЗНАНИУМ»
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class backup_znaniumcombook_activity_task extends backup_activity_task {
 
