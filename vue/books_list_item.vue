@@ -31,7 +31,7 @@
         <div class="col-auto">
             <button
                     class="btn btn-primary"
-                    @click="selectBook(publication.id)"
+                    @click="selectBook()"
                     v-text="strings.select_book_btn"
             ></button>
         </div>

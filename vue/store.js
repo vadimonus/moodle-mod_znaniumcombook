@@ -24,12 +24,9 @@
 
 import $ from 'jquery';
 import Vue from 'vue';
-import Vuex from 'vuex';
 import moodleAjax from 'core/ajax';
 import moodleStorage from 'core/localstorage';
 import Notification from 'core/notification';
-
-Vue.use(Vuex);
 
 /**
  * Single ajax call to Moodle.
@@ -48,9 +45,9 @@ async function ajax(method, args) {
     }
 }
 
-export default new Vuex.Store({
+export default {
     strict: process.env.NODE_ENV !== 'production',
-    state: {
+    state: () => ({
         strings: {},
         selectedBook: {
             id: null,
@@ -58,12 +55,12 @@ export default new Vuex.Store({
             cover: '',
         },
         searching: false,
-        queryString: false,
+        queryString: '',
         searchError: false,
         pages: [],
         currentPageNum: null,
         pagesTotal: null,
-    },
+    }),
     getters: {
         currentPage: state => {
             if (state.pages[state.currentPageNum] !== undefined) {
@@ -217,4 +214,4 @@ export default new Vuex.Store({
             }
         },
     },
-});
+};

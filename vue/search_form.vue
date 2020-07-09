@@ -44,6 +44,9 @@
                 'strings',
             ]),
         },
+        created: function () {
+            this.queryString = this.$store.state.queryString;
+        },
         methods: {
             onInput: function (event) {
                 this.$emit('input', event.target.value);

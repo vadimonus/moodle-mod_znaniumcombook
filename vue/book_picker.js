@@ -24,7 +24,8 @@
 
 import $ from 'jquery';
 import Vue from 'vue';
-import store from './store';
+import Vuex from 'vuex';
+import storeDefinition from './store';
 import {mapState} from 'vuex';
 import modal from './book_picker_modal';
 
@@ -35,6 +36,8 @@ export function init() {
     const buttonSelector = '#id_book_select';
 
     let appElement = $(bookIdSelector).parent().get(0);
+
+    Vue.use(Vuex);
 
     new Vue({
         el: appElement,
@@ -72,13 +75,13 @@ export function init() {
             });
         },
         mounted: function () {
-            store.dispatch('loadComponentStrings');
+            this.$store.dispatch('loadComponentStrings');
         },
         watch: {
             'stringsLoaded': function () {
                 $(buttonSelector).removeAttr('disabled');
             },
         },
-        store,
+        store: new Vuex.Store(storeDefinition),
     });
 }
