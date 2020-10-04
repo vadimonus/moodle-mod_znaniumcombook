@@ -58,6 +58,7 @@ class mod_znaniumcombook_mod_form extends moodleform_mod {
 
         $bookelements = array();
         $bookelements[] =& $mform->createElement('hidden', 'id', '', [
+            'id' => 'id_book_id',
             'v-model' => 'selectedBook.id',
         ]);
         $bookelements[] =& $mform->createElement('text', 'description', '', [

@@ -32,4 +32,5 @@ so all documentations is provided in russian language.
 -----------------
 - Релиз 2020-07-08:
     - Первый публичный релиз.
-
+- Релиз 2020-10-05:
+    - Поддержка темы opentechnology.

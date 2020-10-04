@@ -35,7 +35,7 @@ export function init() {
     const bookDescriptionSelector = '#id_book_description';
     const buttonSelector = '#id_book_select';
 
-    let appElement = $(bookIdSelector).parent().get(0);
+    let appElement = $(bookIdSelector).closest('form').get(0);
 
     Vue.use(Vuex);
 
