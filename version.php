@@ -26,10 +26,10 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'mod_znaniumcombook';  // Full name of the plugin.
-$plugin->version = 2020100500; // The current module version (Date: YYYYMMDDXX)
+$plugin->version = 2021011000; // The current module version (Date: YYYYMMDDXX)
 $plugin->requires = 2016120500; // Requires Moodle 3.2.
 $plugin->maturity = MATURITY_STABLE; // Maturity level of this plugin version.
-$plugin->release = '2020-10-05'; // Human readable version name.
+$plugin->release = '2021-01-10'; // Human readable version name.
 $plugin->dependencies = array(
     'block_znanium_com' => 2020060602,
 );

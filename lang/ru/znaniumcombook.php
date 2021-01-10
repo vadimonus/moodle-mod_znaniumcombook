@@ -47,3 +47,5 @@ $string['search_btn'] = 'Поиск';
 $string['search_error'] = 'Произошла ошибка';
 $string['searching'] = '... идет поиск ...';
 $string['select_book_btn'] = 'Выбрать';
+$string['znaniumcombook:addinstance'] = 'Добавлять новый элемент курса «Книга из ЭБС Znanium»';
+$string['znaniumcombook:view'] = 'Просматривать элементы курса «Книга из ЭБС Znanium»';

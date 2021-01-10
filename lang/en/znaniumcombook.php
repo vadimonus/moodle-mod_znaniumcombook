@@ -47,3 +47,5 @@ $string['search_btn'] = 'Search';
 $string['search_error'] = 'Error occurred';
 $string['searching'] = '... searching ...';
 $string['select_book_btn'] = 'Select';
+$string['znaniumcombook:addinstance'] = 'Add a new Book from Znanium DL';
+$string['znaniumcombook:view'] = 'View Book from Znanium DL';
