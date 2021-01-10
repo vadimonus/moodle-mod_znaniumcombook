@@ -6,9 +6,9 @@
   "license": "GPL",
   "private": true,
   "scripts": {
-    "dev": "cross-env webpack --mode development --progress --hide-modules --config webpack.config.dev.js",
-    "watch": "cross-env webpack --mode development --watch --hide-modules --config webpack.config.dev.js",
-    "prod": "cross-env webpack --mode production --progress --hide-modules --config webpack.config.prod.js"
+    "dev": "cross-env webpack --mode development --progress --hide-modules",
+    "watch": "cross-env webpack --mode development --watch --hide-modules",
+    "prod": "cross-env webpack --mode production --progress --hide-modules"
   },
   "dependencies": {
     "vue": "^2.6.11",

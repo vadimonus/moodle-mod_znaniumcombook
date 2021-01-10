@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const WebpackCopyAfterBuildPlugin = require('webpack-copy-after-build-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = (env, options) => {
@@ -12,8 +11,8 @@ module.exports = (env, options) => {
             'bookpicker': './book_picker.js',
         },
         output: {
-            path: path.resolve(__dirname, '../amd/build'),
-            filename: 'bookpicker-lazy.min.js',
+            path: path.resolve(__dirname, '../amd/src'),
+            filename: 'bookpicker-lazy.js',
             libraryTarget: 'amd',
         },
         module: {
@@ -49,10 +48,6 @@ module.exports = (env, options) => {
         devtool: 'inline-source-map',
         plugins: [
             new VueLoaderPlugin(),
-            new WebpackCopyAfterBuildPlugin({
-                'bookpicker': '../../amd/src/bookpicker-lazy.js',
-            }),
-
         ],
         watchOptions: {
             ignored: /node_modules/,
@@ -81,6 +76,11 @@ module.exports = (env, options) => {
 
     if (options.mode === 'production') {
         exports.mode = 'production';
+        exports.output = {
+            path: path.resolve(__dirname, '../amd/build'),
+            filename: 'bookpicker-lazy.min.js',
+            libraryTarget: 'amd',
+        };
         exports.devtool = '';
         exports.plugins = (exports.plugins || []).concat([
             new webpack.LoaderOptionsPlugin({
@@ -92,7 +92,7 @@ module.exports = (env, options) => {
                 new TerserPlugin({
                     cache: true,
                     parallel: true,
-                    sourceMap: true,
+                    sourceMap: false,
                     terserOptions: {
                         output: {
                             comments: false,
