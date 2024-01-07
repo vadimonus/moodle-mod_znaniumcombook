@@ -25,15 +25,44 @@
 
 namespace mod_znaniumcombook;
 
+use core_external\external_api;
+use core_external\external_description;
+use core_external\external_function_parameters;
+use core_external\external_multiple_structure;
+use core_external\external_single_structure;
+use core_external\external_value;
+use curl;
+
 defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/filelib.php');
 
+// For compatibility with 4.1 and earlier
+if (!class_exists('\core_external\external_api')) {
+    class_alias('\external_api', '\core_external\external_api');
+}
+if (!class_exists('\core_external\external_description')) {
+    class_alias('\external_description', '\core_external\external_description');
+}
+if (!class_exists('\core_external\external_function_parameters')) {
+    class_alias('\external_function_parameters', '\core_external\external_function_parameters');
+}
+if (!class_exists('\core_external\external_multiple_structure')) {
+    class_alias('\external_multiple_structure', '\core_external\external_multiple_structure');
+}
+if (!class_exists('\core_external\external_single_structure')) {
+    class_alias('\external_single_structure', '\core_external\external_single_structure');
+}
+if (!class_exists('\core_external\external_value')) {
+    class_alias('\external_value', '\core_external\external_value');
+}
+
 /**
  * Search api class
  */
-class search_api extends \external_api {
+class search_api extends external_api
+{
 
     /**
      * @var string
@@ -41,28 +70,23 @@ class search_api extends \external_api {
     private static $searchurl = 'https://znanium.com/api/search';
 
     /**
-     * @var string
-     */
-    private static $infourl = 'https://znanium.com/api/getinfo';
-
-    /**
      * Returns description of method parameters
-     * @return \external_function_parameters
+     * @return external_function_parameters
      */
     public static function search_books_parameters() {
-        return new \external_function_parameters(array(
-            'searchquery' => new \external_value(PARAM_TEXT, 'Search query', VALUE_REQUIRED),
-            'page' => new \external_value(PARAM_INT, 'Results page', VALUE_DEFAULT, 0),
+        return new external_function_parameters(array(
+            'searchquery' => new external_value(PARAM_TEXT, 'Search query', VALUE_REQUIRED),
+            'page' => new external_value(PARAM_INT, 'Results page', VALUE_DEFAULT, 0),
         ));
     }
 
     /**
      * Returns description of method parameters
-     * @return \external_description
+     * @return external_description
      */
     public static function search_books_returns() {
-        return new \external_multiple_structure(
-            new \external_single_structure(array())
+        return new external_multiple_structure(
+            new external_single_structure(array())
         );
     }
 
@@ -75,7 +99,7 @@ class search_api extends \external_api {
      */
     public static function search_books($searchquery, $page = 0) {
         $domain = get_config('block_znanium_com', 'domain');
-        $curl = new \curl(array('cache' => true, 'module_cache' => 'repository_znanium_com'));
+        $curl = new curl(array('cache' => true, 'module_cache' => 'repository_znanium_com'));
 
         $params = array(
             'searchQuery' => $searchquery,
@@ -99,7 +123,7 @@ class search_api extends \external_api {
      * @param mixed $response the actual response
      * @return mixed response with added defaults for optional items, invalid_response_exception thrown if any problem found
      */
-    public static function clean_returnvalue(\external_description $description, $response) {
+    public static function clean_returnvalue(external_description $description, $response) {
         return $response;
     }
 }
