@@ -25,8 +25,6 @@
 
 namespace mod_znaniumcombook\event;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * List view event
  */

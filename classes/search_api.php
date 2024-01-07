@@ -38,7 +38,7 @@ defined('MOODLE_INTERNAL') || die();
 global $CFG;
 require_once($CFG->libdir . '/filelib.php');
 
-// For compatibility with 4.1 and earlier
+// For compatibility with 4.1 and earlier.
 if (!class_exists('\core_external\external_api')) {
     class_alias('\external_api', '\core_external\external_api');
 }
@@ -61,8 +61,7 @@ if (!class_exists('\core_external\external_value')) {
 /**
  * Search api class
  */
-class search_api extends external_api
-{
+class search_api extends external_api {
 
     /**
      * @var string

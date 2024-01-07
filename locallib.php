@@ -23,8 +23,6 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
-
 /**
  * Print znaniumcombook info and workaround link when JS not available.
  * @param object $book
@@ -44,7 +42,7 @@ function znaniumcombook_print_workaround($book, $cm, $course, $url) {
     echo html_writer::tag('a', get_string('clicktoopen', 'znaniumcombook'), array (
         'href' => $url,
         'class' => 'btn btn-primary',
-        'target' => '_blank'
+        'target' => '_blank',
     ));
     echo html_writer::end_div();
 

@@ -270,7 +270,7 @@ function znaniumcombook_view($instance, $course, $cm, $context) {
     // Trigger course_module_viewed event.
     $params = array(
         'context' => $context,
-        'objectid' => $instance->id
+        'objectid' => $instance->id,
     );
 
     $event = \mod_znaniumcombook\event\course_module_viewed::create($params);

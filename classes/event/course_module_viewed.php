@@ -25,8 +25,6 @@
 
 namespace mod_znaniumcombook\event;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Book view event
  */

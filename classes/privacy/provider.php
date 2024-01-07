@@ -25,8 +25,6 @@
 
 namespace mod_znaniumcombook\privacy;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Privacy provider
  */
