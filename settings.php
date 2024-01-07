@@ -41,10 +41,10 @@ if ($ADMIN->fulltree) {
         0
     ));
 
-    $bibliographypositions = array(
+    $bibliographypositions = [
         ZNANIUMCOMBOOK_BIBLIOGRAPHY_POSITION_BEFORE => get_string('mod_form_bibliography_position_before', 'znaniumcombook'),
         ZNANIUMCOMBOOK_BIBLIOGRAPHY_POSITION_AFTER => get_string('mod_form_bibliography_position_after', 'znaniumcombook'),
-    );
+    ];
     $settings->add(new admin_setting_configselect(
         'znaniumcombook/bibliographyposition',
         get_string('mod_form_bibliography_position', 'znaniumcombook'),

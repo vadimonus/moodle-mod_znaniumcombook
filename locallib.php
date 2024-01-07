@@ -39,11 +39,11 @@ function znaniumcombook_print_workaround($book, $cm, $course, $url) {
     znaniumcombook_print_intro($book, $cm, $course);
 
     echo html_writer::start_div('text-center');
-    echo html_writer::tag('a', get_string('clicktoopen', 'znaniumcombook'), array (
+    echo html_writer::tag('a', get_string('clicktoopen', 'znaniumcombook'), [
         'href' => $url,
         'class' => 'btn btn-primary',
         'target' => '_blank',
-    ));
+    ]);
     echo html_writer::end_div();
 
     echo $OUTPUT->footer();

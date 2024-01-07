@@ -30,6 +30,6 @@ $plugin->version = 2024010800; // The current module version (Date: YYYYMMDDXX).
 $plugin->requires = 2016120500; // Requires Moodle 3.2.
 $plugin->maturity = MATURITY_STABLE; // Maturity level of this plugin version.
 $plugin->release = '2024-01-08'; // Human readable version name.
-$plugin->dependencies = array(
+$plugin->dependencies = [
     'block_znanium_com' => 2020060602,
-);
+];

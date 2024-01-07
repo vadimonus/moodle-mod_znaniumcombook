@@ -31,8 +31,8 @@ $id = required_param('id', PARAM_INT); // Course module ID.
 $forceview = optional_param('forceview', 0, PARAM_BOOL);
 
 $cm = get_coursemodule_from_id('znaniumcombook', $id, 0, false, MUST_EXIST);
-$book = $DB->get_record('znaniumcombook', array('id' => $cm->instance), '*', MUST_EXIST);
-$course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
+$book = $DB->get_record('znaniumcombook', ['id' => $cm->instance], '*', MUST_EXIST);
+$course = $DB->get_record('course', ['id' => $cm->course], '*', MUST_EXIST);
 
 require_course_login($course, true, $cm);
 $context = context_module::instance($cm->id);
@@ -41,12 +41,12 @@ require_capability('mod/znaniumcombook:view', $context);
 // Completion and trigger events.
 znaniumcombook_view($book, $course, $cm, $context);
 
-$PAGE->set_url('/mod/znaniumcombook/view.php', array('id' => $cm->id));
+$PAGE->set_url('/mod/znaniumcombook/view.php', ['id' => $cm->id]);
 
-$params = array(
+$params = [
     'contextid' => $context->id,
     'documentid' => $book->bookid,
-);
+];
 if ($book->bookpage) {
     $params['page'] = $book->bookpage;
 }

@@ -69,7 +69,7 @@ function znaniumcombook_supports($feature) {
  * @return array status array
  */
 function znaniumcombook_reset_userdata($data) {
-    return array();
+    return [];
 }
 
 /**
@@ -142,7 +142,7 @@ function znaniumcombook_update_instance($data, $mform) {
 function znaniumcombook_delete_instance($id) {
     global $CFG, $DB;
 
-    if (!$book = $DB->get_record('znaniumcombook', array('id' => $id))) {
+    if (!$book = $DB->get_record('znaniumcombook', ['id' => $id])) {
         return false;
     }
 
@@ -152,7 +152,7 @@ function znaniumcombook_delete_instance($id) {
     }
 
     // All context files are deleted automatically.
-    $DB->delete_records('znaniumcombook', array('id' => $id));
+    $DB->delete_records('znaniumcombook', ['id' => $id]);
 
     return true;
 }
@@ -170,7 +170,7 @@ function znaniumcombook_delete_instance($id) {
 function znaniumcombook_get_coursemodule_info($coursemodule) {
     global $DB;
 
-    if (!$book = $DB->get_record('znaniumcombook', array('id' => $coursemodule->instance),
+    if (!$book = $DB->get_record('znaniumcombook', ['id' => $coursemodule->instance],
         'id, name, intro, introformat, bookdescription, showbibliography, bibliographyposition')
     ) {
         return null;
@@ -180,9 +180,9 @@ function znaniumcombook_get_coursemodule_info($coursemodule) {
     $info->name = $book->name;
 
     $info->icon = '';
-    $fullurl = new moodle_url('/mod/znaniumcombook/view.php', array(
+    $fullurl = new moodle_url('/mod/znaniumcombook/view.php', [
         'id' => $coursemodule->id,
-    ));
+    ]);
     $info->onclick = "window.open('$fullurl'); return false;";
     $info->url = $fullurl;
 
@@ -208,7 +208,7 @@ function znaniumcombook_get_coursemodule_info($coursemodule) {
  * @param stdClass $currentcontext Current context of block
  */
 function znaniumcombook_page_type_list($pagetype, $parentcontext, $currentcontext) {
-    return array();
+    return [];
 }
 
 /**
@@ -220,26 +220,26 @@ function znaniumcombook_page_type_list($pagetype, $parentcontext, $currentcontex
  */
 function znaniumcombook_export_contents($cm, $baseurl) {
     global $CFG, $DB;
-    $contents = array();
+    $contents = [];
     $context = context_module::instance($cm->id);
 
-    $course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
-    $book = $DB->get_record('znaniumcombook', array('id' => $cm->instance), '*', MUST_EXIST);
+    $course = $DB->get_record('course', ['id' => $cm->course], '*', MUST_EXIST);
+    $book = $DB->get_record('znaniumcombook', ['id' => $cm->instance], '*', MUST_EXIST);
 
     if (!has_capability('mod/znaniumcombook:view', $context)) {
-        return array();
+        return [];
     };
 
-    $params = array(
+    $params = [
         'contextid' => $context->id,
         'documentid' => $book->bookid,
-    );
+    ];
     if ($book->bookpage) {
         $params['page'] = $book->bookpage;
     }
     $url = new moodle_url('/blocks/znanium_com/redirect.php', $params);
 
-    $file = array();
+    $file = [];
     $file['type'] = 'url';
     $file['filename'] = 'book';
     $file['filepath'] = null;
@@ -268,10 +268,10 @@ function znaniumcombook_export_contents($cm, $baseurl) {
 function znaniumcombook_view($instance, $course, $cm, $context) {
 
     // Trigger course_module_viewed event.
-    $params = array(
+    $params = [
         'context' => $context,
         'objectid' => $instance->id,
-    );
+    ];
 
     $event = \mod_znaniumcombook\event\course_module_viewed::create($params);
     $event->add_record_snapshot('course_modules', $cm);
@@ -293,8 +293,8 @@ function znaniumcombook_view($instance, $course, $cm, $context) {
  * @return stdClass an object with the different type of areas indicating if they were updated or not
  * @since Moodle 3.2
  */
-function znaniumcombook_check_updates_since(cm_info $cm, $from, $filter = array()) {
-    $updates = course_check_module_updates_since($cm, $from, array('content'), $filter);
+function znaniumcombook_check_updates_since(cm_info $cm, $from, $filter = []) {
+    $updates = course_check_module_updates_since($cm, $from, ['content'], $filter);
     return $updates;
 }
 

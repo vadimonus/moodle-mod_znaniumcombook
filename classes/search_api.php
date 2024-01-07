@@ -73,10 +73,10 @@ class search_api extends external_api {
      * @return external_function_parameters
      */
     public static function search_books_parameters() {
-        return new external_function_parameters(array(
+        return new external_function_parameters([
             'searchquery' => new external_value(PARAM_TEXT, 'Search query', VALUE_REQUIRED),
             'page' => new external_value(PARAM_INT, 'Results page', VALUE_DEFAULT, 0),
-        ));
+        ]);
     }
 
     /**
@@ -85,7 +85,7 @@ class search_api extends external_api {
      */
     public static function search_books_returns() {
         return new external_multiple_structure(
-            new external_single_structure(array())
+            new external_single_structure([])
         );
     }
 
@@ -98,12 +98,12 @@ class search_api extends external_api {
      */
     public static function search_books($searchquery, $page = 0) {
         $domain = get_config('block_znanium_com', 'domain');
-        $curl = new curl(array('cache' => true, 'module_cache' => 'repository_znanium_com'));
+        $curl = new curl(['cache' => true, 'module_cache' => 'repository_znanium_com']);
 
-        $params = array(
+        $params = [
             'searchQuery' => $searchquery,
             'domain' => $domain,
-        );
+        ];
         if ($page) {
             $params['page'] = $page;
         }

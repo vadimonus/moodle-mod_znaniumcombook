@@ -34,7 +34,7 @@ class restore_znaniumcombook_activity_structure_step extends restore_activity_st
      */
     protected function define_structure() {
 
-        $paths = array();
+        $paths = [];
         $paths[] = new restore_path_element('znaniumcombook', '/activity/znaniumcombook');
 
         // Return the paths wrapped into standard activity structure.

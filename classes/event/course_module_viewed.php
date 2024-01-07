@@ -69,6 +69,6 @@ class course_module_viewed extends \core\event\course_module_viewed {
      * @return array
      */
     public static function get_objectid_mapping() {
-        return array('db' => 'znaniumcombook', 'restore' => 'znaniumcombook');
+        return ['db' => 'znaniumcombook', 'restore' => 'znaniumcombook'];
     }
 }

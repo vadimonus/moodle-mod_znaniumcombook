@@ -25,12 +25,12 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$functions = array(
-    'mod_znaniumcombook_search' => array(
+$functions = [
+    'mod_znaniumcombook_search' => [
         'classname' => 'mod_znaniumcombook\search_api',
         'methodname' => 'search_books',
         'description' => 'Search books',
         'type' => 'read',
         'ajax' => true,
-    ),
-);
+    ],
+];

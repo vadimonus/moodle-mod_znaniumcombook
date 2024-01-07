@@ -38,12 +38,12 @@ class backup_znaniumcombook_activity_structure_step extends backup_activity_stru
         // Module stores no user info.
 
         // Define each element separated.
-        $znaniumcombook = new backup_nested_element('znaniumcombook', array('id'), array(
+        $znaniumcombook = new backup_nested_element('znaniumcombook', ['id'], [
             'name', 'timemodified', 'intro', 'introformat', 'bookid', 'bookdescription', 'bookpage',
-            'showbibliography', 'bibliographyposition'));
+            'showbibliography', 'bibliographyposition']);
 
         // Define sources.
-        $znaniumcombook->set_source_table('znaniumcombook', array('id' => backup::VAR_ACTIVITYID));
+        $znaniumcombook->set_source_table('znaniumcombook', ['id' => backup::VAR_ACTIVITYID]);
 
         // Define file annotations.
         $znaniumcombook->annotate_files('mod_znaniumcombook', 'intro', null); // This file area hasn't itemid.

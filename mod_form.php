@@ -47,7 +47,7 @@ class mod_znaniumcombook_mod_form extends moodleform_mod {
 
         // -------------------------------------------------------
         $mform->addElement('header', 'general', get_string('general', 'form'));
-        $mform->addElement('text', 'name', get_string('name'), array('size' => '48'));
+        $mform->addElement('text', 'name', get_string('name'), ['size' => '48']);
         if (!empty($CFG->formatstringstriptags)) {
             $mform->setType('name', PARAM_TEXT);
         } else {
@@ -56,7 +56,7 @@ class mod_znaniumcombook_mod_form extends moodleform_mod {
         $mform->addRule('name', null, 'required', null, 'client');
         $mform->addRule('name', get_string('maximumchars', '', 255), 'maxlength', 255, 'client');
 
-        $bookelements = array();
+        $bookelements = [];
         $bookelements[] =& $mform->createElement('hidden', 'id', '', [
             'id' => 'id_book_id',
             'v-model' => 'selectedBook.id',
@@ -70,10 +70,10 @@ class mod_znaniumcombook_mod_form extends moodleform_mod {
             'button',
             'select',
             get_string('open_book_picker_btn', 'znaniumcombook'),
-            array(
+            [
                 '@click' => 'showModal',
                 'disabled' => true,
-            )
+            ]
         );
         $mform->addElement('group', 'book', get_string('mod_form_book', 'znaniumcombook'), $bookelements, ' ', true);
         $mform->setType('book[id]', PARAM_INT);
@@ -82,7 +82,7 @@ class mod_znaniumcombook_mod_form extends moodleform_mod {
 
         $PAGE->requires->js_call_amd('mod_znaniumcombook/bookpicker-lazy', 'init');
 
-        $mform->addElement('text', 'page', get_string('mod_form_page', 'znaniumcombook'), array('size' => '5'));
+        $mform->addElement('text', 'page', get_string('mod_form_page', 'znaniumcombook'), ['size' => '5']);
         $mform->setType('page', PARAM_INT);
 
         // Do not display for single module course format.
@@ -98,10 +98,10 @@ class mod_znaniumcombook_mod_form extends moodleform_mod {
         // -------------------------------------------------------
         $mform->addElement('header', 'optionssection', get_string('appearance'));
 
-        $bibliographypositions = array(
+        $bibliographypositions = [
             ZNANIUMCOMBOOK_BIBLIOGRAPHY_POSITION_BEFORE => get_string('mod_form_bibliography_position_before', 'znaniumcombook'),
             ZNANIUMCOMBOOK_BIBLIOGRAPHY_POSITION_AFTER => get_string('mod_form_bibliography_position_after', 'znaniumcombook'),
-        );
+        ];
         $mform->addElement('select', 'bibliographyposition',
             get_string('mod_form_bibliography_position', 'znaniumcombook'), $bibliographypositions);
         $mform->setType('bibliographyposition', PARAM_INT);
