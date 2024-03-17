@@ -23,10 +23,9 @@
  */
 
 import $ from 'jquery';
-import Vue from 'vue';
-import Vuex from 'vuex';
+import {createApp} from 'vue';
+import {createStore, mapState} from 'vuex';
 import storeDefinition from './store';
-import {mapState} from 'vuex';
 import modal from './book_picker_modal';
 
 export function init() {
@@ -35,14 +34,8 @@ export function init() {
     const bookDescriptionSelector = '#id_book_description';
     const buttonSelector = '#id_book_select';
 
-    let appElement = $(bookIdSelector).closest('form').get(0);
-
-    Vue.use(Vuex);
-
-    new Vue({
-        el: appElement,
+    const app = createApp({
         name: 'BookPickerInput',
-        data: {},
         computed: {
             ...mapState([
                 'strings',
@@ -66,14 +59,6 @@ export function init() {
                 }
             },
         },
-        beforeMount: function() {
-            let id = $(bookIdSelector).val();
-            let biblio_record = $(bookDescriptionSelector).val();
-            this.$store.commit('setSelectedBook', {
-                id,
-                biblio_record
-            });
-        },
         mounted: function () {
             this.$store.dispatch('loadComponentStrings');
         },
@@ -82,6 +67,16 @@ export function init() {
                 $(buttonSelector).removeAttr('disabled');
             },
         },
-        store: new Vuex.Store(storeDefinition),
     });
+
+    const store = createStore(storeDefinition);
+    app.use(store);
+
+    store.commit('setSelectedBook', {
+        id: $(bookIdSelector).val(),
+        biblio_record: $(bookDescriptionSelector).val(),
+    });
+
+    const appElement = $(bookIdSelector).closest('form').get(0);
+    app.mount(appElement);
 }

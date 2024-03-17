@@ -23,7 +23,6 @@
  */
 
 import $ from 'jquery';
-import Vue from 'vue';
 import moodleAjax from 'core/ajax';
 import moodleStorage from 'core/localstorage';
 import Notification from 'core/notification';
@@ -93,7 +92,7 @@ export default {
             state.pagesLoaded = null;
         },
         setPage(state, payload) {
-            Vue.set(state.pages, payload.page, payload.publications);
+            state.pages[payload.page] = payload.publications;
         },
         setCurrentPage(state, value) {
             state.currentPageNum = value;

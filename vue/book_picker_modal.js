@@ -24,8 +24,8 @@
 
 import ModalFactory from 'core/modal_factory';
 import ModalEvents from 'core/modal_events';
-import Vue from 'vue';
 import BookPickerModalBody from './book_picker_modal_body';
+import {createApp} from 'vue';
 
 export default class BookPickerModal {
 
@@ -43,7 +43,7 @@ export default class BookPickerModal {
         this.modal.setLarge();
 
         this.modal.getRoot().on(ModalEvents.hidden, function() {
-            this.vue.$destroy();
+            this.vue.unmount();
             this.modal.setBody('');
             onHideCallback();
         }.bind(this));
@@ -52,8 +52,7 @@ export default class BookPickerModal {
             const template = '<div id="book-picker-modal-body"><book-picker-modal-body @book-selected="onBookSelected"></book-picker-modal-body></div>';
             this.modal.setBody(template);
 
-            this.vue = new Vue({
-                el: '#book-picker-modal-body',
+            this.vue = createApp({
                 name: 'BookPickerModalWrapper',
                 components: {
                     BookPickerModalBody,
@@ -65,6 +64,8 @@ export default class BookPickerModal {
                 },
                 parent: this.parentVue,
             });
+            this.vue.use(this.parentVue.$store);
+            this.vue.mount('#book-picker-modal-body');
         }.bind(this));
 
         this.modal.show();

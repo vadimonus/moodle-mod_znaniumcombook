@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const { VueLoaderPlugin } = require('vue-loader');
 const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = (env, options) => {
@@ -18,13 +18,6 @@ module.exports = (env, options) => {
         module: {
             rules: [
                 {
-                    test: /\.css$/,
-                    use: [
-                        'vue-style-loader',
-                        'css-loader',
-                    ],
-                },
-                {
                     test: /\.vue$/,
                     loader: 'vue-loader',
                     options: {
@@ -41,11 +34,11 @@ module.exports = (env, options) => {
         },
         resolve: {
             alias: {
-                'vue$': 'vue/dist/vue.esm.js',
+                'vue$': 'vue/dist/vue.esm-browser.js',
             },
-            extensions: ['*', '.js', '.vue', '.json'],
+            extensions: ['.js', '.vue'],
         },
-        devtool: 'inline-source-map',
+        devtool: false,
         plugins: [
             new VueLoaderPlugin(),
         ],
@@ -81,7 +74,7 @@ module.exports = (env, options) => {
             filename: 'bookpicker-lazy.min.js',
             libraryTarget: 'amd',
         };
-        exports.devtool = '';
+        exports.devtool = false;
         exports.plugins = (exports.plugins || []).concat([
             new webpack.LoaderOptionsPlugin({
                 minimize: true,
@@ -90,9 +83,7 @@ module.exports = (env, options) => {
         exports.optimization = {
             minimizer: [
                 new TerserPlugin({
-                    cache: true,
                     parallel: true,
-                    sourceMap: false,
                     terserOptions: {
                         output: {
                             comments: false,
@@ -101,6 +92,7 @@ module.exports = (env, options) => {
                 }),
             ],
         };
+        exports.resolve.alias.vue$ = 'vue/dist/vue.esm-browser.prod.js';
     }
 
     return exports;
