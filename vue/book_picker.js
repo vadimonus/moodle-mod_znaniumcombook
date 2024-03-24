@@ -77,6 +77,10 @@ export function init() {
         biblio_record: $(bookDescriptionSelector).val(),
     });
 
-    const appElement = $(bookIdSelector).closest('form').get(0);
+    const commonParent = function (el1, el2, el3) {
+        return $(el1).parents().has(el2).has(el3).first().get(0);
+    };
+
+    const appElement = commonParent(bookIdSelector, bookDescriptionSelector, buttonSelector);
     app.mount(appElement);
 }
