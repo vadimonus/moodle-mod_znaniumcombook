@@ -4,17 +4,8 @@ const { VueLoaderPlugin } = require('vue-loader');
 const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = (env, options) => {
-
-    exports = {
+    let base = {
         mode: 'development',
-        entry: {
-            'bookpicker': './book_picker.js',
-        },
-        output: {
-            path: path.resolve(__dirname, '../amd/src'),
-            filename: 'bookpicker-lazy.js',
-            libraryTarget: 'amd',
-        },
         module: {
             rules: [
                 {
@@ -38,9 +29,12 @@ module.exports = (env, options) => {
             },
             extensions: ['.js', '.vue'],
         },
-        devtool: false,
+        devtool: 'inline-source-map',
         plugins: [
             new VueLoaderPlugin(),
+            new webpack.DefinePlugin({
+                __VUE_PROD_DEVTOOLS__: JSON.stringify(false)
+            }),
         ],
         watchOptions: {
             ignored: /node_modules/,
@@ -68,19 +62,14 @@ module.exports = (env, options) => {
     };
 
     if (options.mode === 'production') {
-        exports.mode = 'production';
-        exports.output = {
-            path: path.resolve(__dirname, '../amd/build'),
-            filename: 'bookpicker-lazy.min.js',
-            libraryTarget: 'amd',
-        };
-        exports.devtool = false;
-        exports.plugins = (exports.plugins || []).concat([
+        base.mode = 'production';
+        base.devtool = false;
+        base.plugins = (base.plugins || []).concat([
             new webpack.LoaderOptionsPlugin({
                 minimize: true,
             }),
         ]);
-        exports.optimization = {
+        base.optimization = {
             minimizer: [
                 new TerserPlugin({
                     parallel: true,
@@ -92,8 +81,31 @@ module.exports = (env, options) => {
                 }),
             ],
         };
-        exports.resolve.alias.vue$ = 'vue/dist/vue.esm-browser.prod.js';
+        base.resolve.alias.vue$ = 'vue/dist/vue.esm-browser.prod.js';
     }
 
-    return exports;
+    let src = {
+        ...base,
+        entry: {
+            'bookpicker': './book_picker.js',
+        },
+        output: {
+            path: path.resolve(__dirname, '../amd/src'),
+            filename: 'bookpicker-lazy.js',
+            libraryTarget: 'amd',
+        },
+    };
+    let build = {
+        ...base,
+        entry: {
+            'bookpicker': './book_picker.js',
+        },
+        output: {
+            path: path.resolve(__dirname, '../amd/build'),
+            filename: 'bookpicker-lazy.min.js',
+            libraryTarget: 'amd',
+        },
+    };
+
+    return [src, build];
 };
