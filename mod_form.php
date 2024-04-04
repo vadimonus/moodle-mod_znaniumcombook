@@ -78,7 +78,7 @@ class mod_znaniumcombook_mod_form extends moodleform_mod {
         $mform->addElement('group', 'book', get_string('mod_form_book', 'znaniumcombook'), $bookelements, ' ', true);
         $mform->setType('book[id]', PARAM_INT);
         $mform->setType('book[description]', PARAM_RAW_TRIMMED);
-        $mform->addRule('book', null, 'required', null, 'client');
+        $mform->addRule('book', null, 'required', null, 'server');
 
         $PAGE->requires->js_call_amd('mod_znaniumcombook/bookpicker-lazy', 'init');
 
