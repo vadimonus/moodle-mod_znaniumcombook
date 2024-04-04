@@ -66,7 +66,7 @@ class search_api extends external_api {
     /**
      * @var string
      */
-    private static $searchurl = 'https://znanium.com/api/search';
+    private static $searchurl = 'https://znanium.ru/api/search';
 
     /**
      * Returns description of method parameters
