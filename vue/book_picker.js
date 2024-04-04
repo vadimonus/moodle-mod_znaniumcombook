@@ -26,13 +26,19 @@ import $ from 'jquery';
 import {createApp} from 'vue';
 import {createStore, mapState} from 'vuex';
 import storeDefinition from './store';
-import modal from './book_picker_modal';
+import BookPickerModal from './book_picker_modal';
 
 export function init() {
 
     const bookIdSelector = '#id_book_id';
     const bookDescriptionSelector = '#id_book_description';
     const buttonSelector = '#id_book_select';
+
+    const store = createStore(storeDefinition);
+    store.commit('setSelectedBook', {
+        id: $(bookIdSelector).val(),
+        biblio_record: $(bookDescriptionSelector).val(),
+    });
 
     const app = createApp({
         name: 'BookPickerInput',
@@ -48,15 +54,10 @@ export function init() {
         methods: {
             showModal: function () {
                 $(buttonSelector).attr('disabled', true);
-                this.modal = new modal(this);
+                this.modal = new BookPickerModal(store);
                 this.modal.show(function () {
                     $(buttonSelector).removeAttr('disabled');
                 });
-            },
-            hideModal: function () {
-                if (this.modal) {
-                    this.modal.hide();
-                }
             },
         },
         mounted: function () {
@@ -68,14 +69,7 @@ export function init() {
             },
         },
     });
-
-    const store = createStore(storeDefinition);
     app.use(store);
-
-    store.commit('setSelectedBook', {
-        id: $(bookIdSelector).val(),
-        biblio_record: $(bookDescriptionSelector).val(),
-    });
 
     const commonParent = function (el1, el2, el3) {
         return $(el1).parents().has(el2).has(el3).first().get(0);

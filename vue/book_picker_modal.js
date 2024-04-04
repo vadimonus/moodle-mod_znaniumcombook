@@ -29,50 +29,45 @@ import {createApp} from 'vue';
 
 export default class BookPickerModal {
 
-    constructor(parentVue) {
-        this.parentVue = parentVue;
+    constructor(store) {
+        this.store = store;
     }
 
     async show(onHideCallback) {
-        this.modal = await ModalFactory.create({
+        const bookPickerModal = this;
+
+        let moodleModal = await ModalFactory.create({
             type: ModalFactory.types.CANCEL,
-            title: this.parentVue.strings.modal_title,
-            body: '',
+            title: bookPickerModal.store.state.strings.modal_title,
+            body: '<div id="book-picker-modal-body"></div>',
+        });
+        let vue;
+
+        moodleModal.setLarge();
+
+        moodleModal.getRoot().on(ModalEvents.hidden, function() {
+            vue.unmount();
+            moodleModal.destroy();
+            onHideCallback();
         });
 
-        this.modal.setLarge();
-
-        this.modal.getRoot().on(ModalEvents.hidden, function() {
-            this.vue.unmount();
-            this.modal.setBody('');
-            onHideCallback();
-        }.bind(this));
-
-        this.modal.getRoot().on(ModalEvents.shown, function() {
-            const template = '<div id="book-picker-modal-body"><book-picker-modal-body @book-selected="onBookSelected"></book-picker-modal-body></div>';
-            this.modal.setBody(template);
-
-            this.vue = createApp({
+        moodleModal.getRoot().on(ModalEvents.shown, function() {
+            vue = createApp({
                 name: 'BookPickerModalWrapper',
                 components: {
                     BookPickerModalBody,
                 },
+                template: '<book-picker-modal-body @book-selected="onBookSelected"></book-picker-modal-body>',
                 methods: {
                     onBookSelected: function () {
-                        this.modal.hide();
-                    }.bind(this),
+                        moodleModal.hide();
+                    },
                 },
-                parent: this.parentVue,
             });
-            this.vue.use(this.parentVue.$store);
-            this.vue.mount('#book-picker-modal-body');
-        }.bind(this));
+            vue.use(bookPickerModal.store);
+            vue.mount('#book-picker-modal-body');
+        });
 
-        this.modal.show();
-
-    }
-
-    hide() {
-        this.modal.hide();
+        moodleModal.show();
     }
 }
