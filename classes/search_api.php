@@ -32,6 +32,7 @@ use core_external\external_multiple_structure;
 use core_external\external_single_structure;
 use core_external\external_value;
 use curl;
+use moodle_exception;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -108,7 +109,11 @@ class search_api extends external_api {
             $params['page'] = $page;
         }
         $json = $curl->get(static::$searchurl, $params);
-        return json_decode($json, true);
+        $result = json_decode($json, true);
+        if (!is_array($result)) {
+            throw new moodle_exception('search_error', 'mod_znaniumcombook', '', null, $json);
+        }
+        return $result;
     }
 
     /**

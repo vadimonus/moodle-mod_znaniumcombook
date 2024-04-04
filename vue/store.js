@@ -39,7 +39,9 @@ async function ajax(method, args) {
     try {
         return await moodleAjax.call([request])[0];
     } catch (e) {
-        Notification.exception(e);
+        if (e.debuginfo) {
+            Notification.exception(e);
+        }
         throw e;
     }
 }
