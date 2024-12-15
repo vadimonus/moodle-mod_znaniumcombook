@@ -42,3 +42,5 @@ so all documentations is provided in russian language.
   - Переход на vue 3
   - Исправление ошибки с пропадающими кнопками в редакторе в форме редактирования
   - Переключение на znanium.ru
+- Релиз 2024-15-12:
+  - Исправление warning о cached_cm_info::$url при создании элемента курса

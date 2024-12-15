@@ -184,7 +184,6 @@ function znaniumcombook_get_coursemodule_info($coursemodule) {
         'id' => $coursemodule->id,
     ]);
     $info->onclick = "window.open('$fullurl'); return false;";
-    $info->url = $fullurl;
 
     $info->content = '';
     if ($book->showbibliography && $book->bibliographyposition == ZNANIUMCOMBOOK_BIBLIOGRAPHY_POSITION_BEFORE) {
